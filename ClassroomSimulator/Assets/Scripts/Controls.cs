@@ -48,7 +48,7 @@ public class Controls : MonoBehaviour
         Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput);
         Vector3 velocity = direction * moveSpeed;
         velocity = Camera.main.transform.TransformDirection(velocity);
-        velocity.y = 0;
+        velocity.y = 0; //to prevent character from flying when moving forward while looking up
 
         controller.Move(velocity * Time.deltaTime);
     }
