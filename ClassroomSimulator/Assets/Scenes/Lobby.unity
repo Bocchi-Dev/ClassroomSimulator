@@ -994,7 +994,7 @@ MonoBehaviour:
   controller: {fileID: 2071972953}
   moveSpeed: 10
   gravity: 10
-  distanceOfRaycast: 0
+  distanceOfRaycast: 5
 --- !u!143 &2071972953
 CharacterController:
   m_ObjectHideFlags: 0

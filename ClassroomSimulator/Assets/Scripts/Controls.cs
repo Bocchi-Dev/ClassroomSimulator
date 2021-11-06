@@ -45,11 +45,10 @@ public class Controls : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
+        Vector3 direction = new Vector3(horizontalInput, 0f, verticalInput);
         Vector3 velocity = direction * moveSpeed;
         velocity = Camera.main.transform.TransformDirection(velocity);
-
-        //Vector3 move = transform.right * horizontalInput + transform.forward * verticalInput;
+        velocity.y = 0;
 
         controller.Move(velocity * Time.deltaTime);
     }
