@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class Controls : MonoBehaviour
+public class Controls : NetworkBehaviour
 {
     //Movement Jazz
     public CharacterController controller;
@@ -11,9 +12,20 @@ public class Controls : MonoBehaviour
 
     public float gravity = 10f;
 
+    public NetworkVariable<Vector3> playerPosition = new NetworkVariable<Vector3>();
+
     //Interaction Jazz
     public int distanceOfRaycast;
     private RaycastHit _hit;
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            Move();
+        }
+    }
+
     private void Awake()
     {
         
@@ -42,10 +54,10 @@ public class Controls : MonoBehaviour
                 Debug.Log("touched " + _hit.transform.gameObject.GetComponent<ChangeScene>().SceneName);
             }
         }
-        playerMovement();
+        PlayerMove();
     }
 
-    void playerMovement()
+    void PlayerMove()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
@@ -60,6 +72,24 @@ public class Controls : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
     }
+    public void Move()
+    {
+        if (NetworkManager.Singleton.IsServer)
+        {
+            playerPosition.Value = transform.position;
+        }
+        else
+        {
+            SubmitPositionRequestServerRpc();
+        }
+    }
+
+    [ServerRpc]
+    void SubmitPositionRequestServerRpc(ServerRpcParams rpcParams = default)
+    {
+        playerPosition.Value = transform.position;
+    }
+
     void interact()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));

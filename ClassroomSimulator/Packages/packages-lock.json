@@ -10,6 +10,13 @@
       },
       "hash": "6ea2c3c041dfe61a3b254fc482fd56ad852a725c"
     },
+    "com.hwaet.projectcloner": {
+      "version": "https://github.com/hwaet/UnityProjectCloner.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "03574fbe08f90d9482056b06f99c4072aa6b3920"
+    },
     "com.unity.burst": {
       "version": "1.5.4",
       "depth": 2,
