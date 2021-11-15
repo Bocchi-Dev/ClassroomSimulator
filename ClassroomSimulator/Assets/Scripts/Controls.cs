@@ -40,20 +40,7 @@ public class Controls : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-
-        if (Physics.Raycast(ray, out _hit, distanceOfRaycast))
-        {
-            if (Input.GetButtonDown("Interact") && _hit.transform.CompareTag("Rotateable"))
-            {
-                _hit.transform.gameObject.GetComponent<RotateObject>().ChangeSpin();
-            }
-            if (_hit.transform.CompareTag("Button") && Input.GetButtonDown("Interact"))
-            {
-                _hit.transform.gameObject.GetComponent<ChangeScene>().changeScene(_hit.transform.gameObject.GetComponent<ChangeScene>().SceneName);
-                Debug.Log("touched " + _hit.transform.gameObject.GetComponent<ChangeScene>().SceneName);
-            }
-        }
+        interact();
         PlayerMove();
     }
 
@@ -71,6 +58,7 @@ public class Controls : NetworkBehaviour
         //Vector3 move = transform.right * horizontalInput + transform.forward * verticalInput;
 
         controller.Move(velocity * Time.deltaTime);
+        Move();
     }
     public void Move()
     {
@@ -96,14 +84,26 @@ public class Controls : NetworkBehaviour
 
         if (Physics.Raycast(ray, out _hit, distanceOfRaycast))
         {
-            if (_hit.transform.CompareTag("Rotateable") && Input.GetButtonDown("Interact"))
+            if (_hit.transform.CompareTag("Rotateable") && Input.GetButtonDown("Interact") )
             {
                 _hit.transform.gameObject.GetComponent<RotateObject>().ChangeSpin();
             }
             if (_hit.transform.CompareTag("Button") && Input.GetButtonDown("Interact"))
             {
-                _hit.transform.gameObject.GetComponent<ChangeScene>().changeScene(_hit.transform.gameObject.GetComponent<ChangeScene>().SceneName);
-                Debug.Log("touched " + _hit.transform.gameObject.GetComponent<ChangeScene>().SceneName);
+                _hit.transform.gameObject.GetComponent<ChangeScene>().changeScene(_hit.transform.gameObject.GetComponent<ChangeScene>().SceneName); 
+            }
+            if(_hit.transform.CompareTag("MainMenuButton") && Input.GetButtonDown("Interact"))
+            {
+                if(_hit.transform.gameObject.name == "HostButton")
+                {
+                    MainMenuManager.StartHost();
+                    Debug.Log("Clicked Host");
+                }
+                if (_hit.transform.gameObject.name == "ClientButton")
+                {
+                    MainMenuManager.StartClient();
+                    Debug.Log("Clicked Client");
+                }
             }
         }
     }

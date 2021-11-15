@@ -7,6 +7,7 @@ TagManager:
   - Rotateable
   - Ground
   - Button
+  - MainMenuButton
   layers:
   - Default
   - TransparentFX

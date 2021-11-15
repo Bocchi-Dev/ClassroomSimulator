@@ -4,6 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+    private void Start()
+    {
+        
+    }
+
     void OnGUI()
     {
         GUILayout.BeginArea(new Rect(10, 10, 300, 300));
@@ -30,22 +35,22 @@ public class MainMenuManager : MonoBehaviour
     //    if (GUILayout.Button("Server")) NetworkManager.Singleton.StartServer();
     //}
 
-    static void StartHost()
+    public static void StartHost()
     {
         NetworkManager.Singleton.StartHost();
-        SceneManager.LoadScene("Lobby");
+        NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
     }
 
-    static void StartClient()
+    public static void StartClient()
     {
         NetworkManager.Singleton.StartClient();
-        SceneManager.LoadScene("Lobby");
+        //NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
     }
 
-    static void StartServer()
+    public static void StartServer()
     {
         NetworkManager.Singleton.StartServer();
-        SceneManager.LoadScene("Lobby");
+        NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
     }
 
     static void StatusLabels()

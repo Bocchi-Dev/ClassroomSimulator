@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 public class ChangeScene : MonoBehaviour
 {
@@ -9,6 +10,6 @@ public class ChangeScene : MonoBehaviour
    
     public void changeScene(string sceneName)
     {
-        SceneManager.LoadScene(SceneName);
+        NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }
