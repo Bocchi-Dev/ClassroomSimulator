@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Netcode;
+using Mirror;
 
 public class Controls : NetworkBehaviour
 {
@@ -12,19 +12,9 @@ public class Controls : NetworkBehaviour
 
     public float gravity = 10f;
 
-    public NetworkVariable<Vector3> playerPosition = new NetworkVariable<Vector3>();
-
     //Interaction Jazz
     public int distanceOfRaycast;
     private RaycastHit _hit;
-
-    public override void OnNetworkSpawn()
-    {
-        if (IsOwner)
-        {
-            Move();
-        }
-    }
 
     private void Awake()
     {
@@ -62,20 +52,7 @@ public class Controls : NetworkBehaviour
     }
     public void Move()
     {
-        if (NetworkManager.Singleton.IsServer)
-        {
-            playerPosition.Value = transform.position;
-        }
-        else
-        {
-            SubmitPositionRequestServerRpc();
-        }
-    }
-
-    [ServerRpc]
-    void SubmitPositionRequestServerRpc(ServerRpcParams rpcParams = default)
-    {
-        playerPosition.Value = transform.position;
+      
     }
 
     void interact()
@@ -84,26 +61,9 @@ public class Controls : NetworkBehaviour
 
         if (Physics.Raycast(ray, out _hit, distanceOfRaycast))
         {
-            if (_hit.transform.CompareTag("Rotateable") && Input.GetButtonDown("Interact") )
+            if (_hit.transform.CompareTag("Rotateable") && Input.GetButtonDown("Interact"))
             {
                 _hit.transform.gameObject.GetComponent<RotateObject>().ChangeSpin();
-            }
-            if (_hit.transform.CompareTag("Button") && Input.GetButtonDown("Interact"))
-            {
-                _hit.transform.gameObject.GetComponent<ChangeScene>().changeScene(_hit.transform.gameObject.GetComponent<ChangeScene>().SceneName); 
-            }
-            if(_hit.transform.CompareTag("MainMenuButton") && Input.GetButtonDown("Interact"))
-            {
-                if(_hit.transform.gameObject.name == "HostButton")
-                {
-                    MainMenuManager.StartHost();
-                    Debug.Log("Clicked Host");
-                }
-                if (_hit.transform.gameObject.name == "ClientButton")
-                {
-                    MainMenuManager.StartClient();
-                    Debug.Log("Clicked Client");
-                }
             }
         }
     }
