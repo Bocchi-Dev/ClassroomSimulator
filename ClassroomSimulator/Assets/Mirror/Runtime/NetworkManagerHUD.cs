@@ -12,6 +12,7 @@ namespace Mirror
     public class NetworkManagerHUD : MonoBehaviour
     {
         NetworkManager manager;
+        GUIStyle myStyle;
 
         public int offsetX;
         public int offsetY;
@@ -23,7 +24,7 @@ namespace Mirror
 
         void OnGUI()
         {
-            GUILayout.BeginArea(new Rect(10 + offsetX, 40 + offsetY, 215, 9999));
+            GUILayout.BeginArea(new Rect(10 + offsetX, 40 + offsetY, 1000, 20000));
             if (!NetworkClient.isConnected && !NetworkServer.active)
             {
                 StartButtons();
@@ -58,7 +59,7 @@ namespace Mirror
                 // Server + Client
                 if (Application.platform != RuntimePlatform.WebGLPlayer)
                 {
-                    if (GUILayout.Button("Host (Server + Client)"))
+                    if (GUILayout.Button("Host (Server + Client)", GUILayout.Width(350), GUILayout.Height(100)))
                     {
                         manager.StartHost();
                     }
@@ -66,12 +67,12 @@ namespace Mirror
 
                 // Client + IP
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button("Client"))
+                if (GUILayout.Button("Client", GUILayout.Width(350), GUILayout.Height(100)))
                 {
                     manager.StartClient();
                 }
                 // This updates networkAddress every frame from the TextField
-                manager.networkAddress = GUILayout.TextField(manager.networkAddress);
+                manager.networkAddress = GUILayout.TextField(manager.networkAddress, GUILayout.Width(350), GUILayout.Height(100));
                 GUILayout.EndHorizontal();
 
                 // Server Only
@@ -82,7 +83,7 @@ namespace Mirror
                 }
                 else
                 {
-                    if (GUILayout.Button("Server Only")) manager.StartServer();
+                    if (GUILayout.Button("Server Only", GUILayout.Width(350), GUILayout.Height(100))) manager.StartServer();
                 }
             }
             else

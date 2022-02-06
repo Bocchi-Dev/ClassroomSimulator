@@ -8,7 +8,7 @@ using System.Linq;
 namespace ClassroomSimulator
 {
 
-    public class Player : NetworkBehaviour
+    public class PlayerMovement : NetworkBehaviour
     {
         private SceneScript sceneScript;
         private GameObject sceneScriptObj;
@@ -16,60 +16,60 @@ namespace ClassroomSimulator
         public TextMesh playerNameText;
         public GameObject floatingInfo;
         private Material playerMaterialClone;
+        private float weaponCooldownTime;
 
         private float autoTurnAmount = 0.0f;
         private float autoMoveAmount = 0.0f;
         public string trafficType = "none";
 
-        [SyncVar(hook = nameof(OnNameChanged))]
-        public string playerName;
-
-        [SyncVar(hook = nameof(OnColorChanged))]
-        public Color playerColor = Color.white;
-
-        //Movement Jazz
+        public float moveSpeed = 10f;
         public CharacterController controller;
 
-        public float moveSpeed = 10f;
-
-        public float gravity = 10f;
-
-        //Interaction Jazz
-        public int distanceOfRaycast;
-        private RaycastHit _hit;
-
+        [SyncVar(hook = nameof(OnNameChanged))]
+        public string playerName;
         void OnNameChanged(string _Old, string _New)
         {
             playerNameText.text = playerName;
         }
 
+        [SyncVar(hook = nameof(OnColorChanged))]
+        public Color playerColor = Color.white;
         void OnColorChanged(Color _Old, Color _New)
         {
+            //Debug.Log(gameObject.name + " HOOK OnColorChanged");
             playerNameText.color = _New;
-            playerMaterialClone = new Material(GetComponent<Renderer>().material);
+            playerMaterialClone = new Material(this.GetComponent<Renderer>().material);
             playerMaterialClone.color = _New;
-            GetComponent<Renderer>().material = playerMaterialClone;
+            this.GetComponent<Renderer>().material = playerMaterialClone;
         }
 
         public override void OnStartLocalPlayer()
         {
-            sceneScript.playerScript = this;
+            //sceneScript.playerScript = this;
 
-            Camera.main.transform.SetParent(transform);
-            Camera.main.transform.localPosition = new Vector3(0, 0, 0);
+            //Camera.main.transform.SetParent(transform);
+            //Camera.main.transform.localPosition = new Vector3(0, 0, 0);
 
             floatingInfo.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
             floatingInfo.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
             CmdSetupPlayer("Player" + UnityEngine.Random.Range(100, 999), new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f)));
 
-            //SetupAutoTraffic();
+            SetupAutoTraffic();
         }
+
+
+
 
         void Awake()
         {
             //allow all players to run this
-            sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
+            //sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
+        }
+
+        private void Start()
+        {
+            controller = GetComponent<CharacterController>();
         }
 
 
@@ -89,28 +89,20 @@ namespace ClassroomSimulator
             sceneScript.statusText = playerName + " joined.";
         }
 
+
         void Update()
         {
             //FindSceneScript();
             //allow all players to run this
-            if (!isLocalPlayer)
+            if (isLocalPlayer == false)
             {
-                // make non-local players run this
                 floatingInfo.transform.LookAt(Camera.main.transform);
-                return;
             }
 
-            PlayerMove();
+            //only our own player runs below here
+            if (!isLocalPlayer) { return; }
 
-            //if (staticC.traffic > 1)
-            //{
-              //  if (autoTurnAmount > 0) { transform.Rotate(0, autoTurnAmount, 0); }
-               // if (autoMoveAmount > 0) { transform.Translate(0, 0, autoMoveAmount); }
-            //}
-        }
-
-        void PlayerMove()
-        {
+            //insert movement here
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
 
@@ -118,13 +110,14 @@ namespace ClassroomSimulator
             Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
             Vector3 velocity = direction * moveSpeed;
             velocity = Camera.main.transform.TransformDirection(velocity);
-            velocity.y -= gravity;
-
-            Vector3 move = transform.right * horizontalInput + transform.forward * verticalInput;
 
             controller.Move(velocity * Time.deltaTime);
 
-            Debug.Log("should be moving");
+            if (staticC.traffic > 1)
+            {
+                if (autoTurnAmount > 0) { transform.Rotate(0, autoTurnAmount, 0); }
+                if (autoMoveAmount > 0) { transform.Translate(0, 0, autoMoveAmount); }
+            }
         }
 
         void AutoRepeatingMessage()
