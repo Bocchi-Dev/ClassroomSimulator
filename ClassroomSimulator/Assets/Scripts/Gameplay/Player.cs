@@ -40,7 +40,7 @@ namespace ClassroomSimulator
 
         void OnNameChanged(string _Old, string _New)
         {
-            playerNameText.text = playerName;
+            playerNameText.text = FindObjectOfType<MenuClientButton>().playerName;
         }
 
         void OnColorChanged(Color _Old, Color _New)
@@ -102,11 +102,6 @@ namespace ClassroomSimulator
 
             PlayerMove();
 
-            //if (staticC.traffic > 1)
-            //{
-              //  if (autoTurnAmount > 0) { transform.Rotate(0, autoTurnAmount, 0); }
-               // if (autoMoveAmount > 0) { transform.Translate(0, 0, autoMoveAmount); }
-            //}
         }
 
         void PlayerMove()

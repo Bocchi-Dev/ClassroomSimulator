@@ -29,6 +29,7 @@ namespace ClassroomSimulator
         public string playerName;
         void OnNameChanged(string _Old, string _New)
         {
+            playerName = FindObjectOfType<MenuClientButton>().playerName;
             playerNameText.text = playerName;
         }
 
@@ -57,9 +58,6 @@ namespace ClassroomSimulator
 
             SetupAutoTraffic();
         }
-
-
-
 
         void Awake()
         {
