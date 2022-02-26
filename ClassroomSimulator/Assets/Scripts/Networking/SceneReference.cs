@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ClassroomSimulator
@@ -7,3 +9,4 @@ namespace ClassroomSimulator
         public SceneScript sceneScript;
     }
 }
+

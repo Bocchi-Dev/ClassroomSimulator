@@ -1,7 +1,10 @@
-using Mirror;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Mirror;
+using Telepathy;
 
 namespace ClassroomSimulator
 {
@@ -12,7 +15,7 @@ namespace ClassroomSimulator
         public Text canvasAutoTraffic;
         public Text canvasPlayerCount;
         public GameObject[] playersArray;
-        public Player playerScript;
+        public PlayerMovement playerScript;
 
         [SyncVar(hook = nameof(OnStatusTextChanged))]
         public string statusText;
@@ -26,28 +29,6 @@ namespace ClassroomSimulator
         {
             if (playerScript) { playerScript.CmdSendPlayerMessage(); }
         }
-
-        public void ButtonChangeScene()
-        {
-            if (isServer)
-            {
-                Scene scene = SceneManager.GetActiveScene();
-                if (scene.name == "MyScene") { NetworkManager.singleton.ServerChangeScene("MyOtherScene"); }
-                else { NetworkManager.singleton.ServerChangeScene("MyScene"); }
-            }
-            else
-            {
-                Debug.Log("You are not Host.");
-            }
-        }
-
-        public Text canvasAmmoText;
-
-        public void UIAmmo(int _value)
-        {
-            canvasAmmoText.text = "Ammo: " + _value;
-        }
-
 
         public void ButtonSetupAutoTraffic()
         {
@@ -66,3 +47,5 @@ namespace ClassroomSimulator
         }
     }
 }
+
+

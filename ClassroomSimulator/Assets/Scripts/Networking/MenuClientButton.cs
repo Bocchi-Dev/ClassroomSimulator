@@ -9,7 +9,6 @@ public class MenuClientButton : MonoBehaviour
 {
     NetworkManager manager;
 
-    public TMP_InputField serverIP;
     public TMP_InputField playerNameInput;
 
     public string playerName;
@@ -21,8 +20,6 @@ public class MenuClientButton : MonoBehaviour
 
     public void startClient()
     {
-        Debug.Log(serverIP.text);
-        manager.networkAddress = serverIP.text;
         playerName = playerNameInput.text;
         manager.StartClient();      
     }
@@ -33,5 +30,4 @@ public class MenuClientButton : MonoBehaviour
         manager.StartHost();
     }
 
-   
 }

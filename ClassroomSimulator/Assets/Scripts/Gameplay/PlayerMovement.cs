@@ -7,7 +7,6 @@ using System.Linq;
 
 namespace ClassroomSimulator
 {
-
     public class PlayerMovement : NetworkBehaviour
     {
         private SceneScript sceneScript;
@@ -46,10 +45,7 @@ namespace ClassroomSimulator
 
         public override void OnStartLocalPlayer()
         {
-            //sceneScript.playerScript = this;
-
-            //Camera.main.transform.SetParent(transform);
-            //Camera.main.transform.localPosition = new Vector3(0, 0, 0);
+            sceneScript.playerScript = this;
 
             floatingInfo.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
             floatingInfo.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
@@ -59,17 +55,10 @@ namespace ClassroomSimulator
             SetupAutoTraffic();
         }
 
-        void Awake()
-        {
-            //allow all players to run this
-            //sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
-        }
-
         private void Start()
         {
             controller = GetComponent<CharacterController>();
         }
-
 
         [Command]
         public void CmdSendPlayerMessage()
@@ -77,16 +66,13 @@ namespace ClassroomSimulator
             if (sceneScript) { sceneScript.statusText = playerName + " says hello " + UnityEngine.Random.Range(10, 99); }
         }
 
-
         [Command]
         public void CmdSetupPlayer(string _name, Color _col)
         {
             //player info sent to server, then server updates sync vars which handles it on all clients
             playerName = _name;
             playerColor = _col;
-            sceneScript.statusText = playerName + " joined.";
         }
-
 
         void Update()
         {
@@ -122,7 +108,6 @@ namespace ClassroomSimulator
         {
             CmdSendPlayerMessage();
         }
-
 
         public void SetupAutoTraffic()
         {
