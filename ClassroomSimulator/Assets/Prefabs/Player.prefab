@@ -189,7 +189,7 @@ MonoBehaviour:
   floatingInfo: {fileID: 7816150434414208728}
   trafficType: none
   moveSpeed: 10
-  controller: {fileID: 0}
+  controller: {fileID: 4665223277009370005}
   playerName: JJ
   playerColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &4665223277264709684

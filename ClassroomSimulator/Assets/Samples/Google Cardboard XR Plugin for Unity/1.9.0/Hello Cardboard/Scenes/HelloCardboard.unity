@@ -182,7 +182,8 @@ PrefabInstance:
       propertyPath: SceneName
       value: Lobby
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 630943198078476844, guid: 47d464eade8c70d42a6d3caa9c6bd764, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 47d464eade8c70d42a6d3caa9c6bd764, type: 3}
 --- !u!1 &148680882
 GameObject:
@@ -783,6 +784,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1295473299260153641, guid: a868415b4336c954cb373dc71f0ea21e, type: 3}
+      propertyPath: sceneId
+      value: 2849757537
+      objectReference: {fileID: 0}
     - target: {fileID: 4665223277009370007, guid: a868415b4336c954cb373dc71f0ea21e, type: 3}
       propertyPath: m_RootOrder
       value: 4

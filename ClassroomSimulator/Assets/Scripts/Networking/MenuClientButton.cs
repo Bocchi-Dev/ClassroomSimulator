@@ -32,4 +32,6 @@ public class MenuClientButton : MonoBehaviour
         playerName = playerNameInput.text;
         manager.StartHost();
     }
+
+   
 }
