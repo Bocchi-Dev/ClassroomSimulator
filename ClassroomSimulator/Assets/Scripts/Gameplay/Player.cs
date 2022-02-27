@@ -1,13 +1,12 @@
 using UnityEngine;
 using Mirror;
-using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Linq;
 
 namespace ClassroomSimulator
 {
-    public class PlayerMovement : NetworkBehaviour
+    public class Player : NetworkBehaviour
     {
         private SceneScript sceneScript;
         private GameObject sceneScriptObj;
@@ -28,7 +27,6 @@ namespace ClassroomSimulator
         public string playerName;
         void OnNameChanged(string _Old, string _New)
         {
-            playerName = FindObjectOfType<MenuClientButton>().playerName;
             playerNameText.text = playerName;
         }
 
@@ -50,9 +48,17 @@ namespace ClassroomSimulator
             floatingInfo.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
             floatingInfo.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
-            CmdSetupPlayer("Player" + UnityEngine.Random.Range(100, 999), new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f)));
+            string name = FindObjectOfType<MenuClientButton>().playerName;
+            Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+            CmdSetupPlayer(name, color);
 
             SetupAutoTraffic();
+        }
+
+        void Awake()
+        {
+            //allow all players to run this
+            sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
         }
 
         private void Start()
@@ -70,6 +76,7 @@ namespace ClassroomSimulator
         public void CmdSetupPlayer(string _name, Color _col)
         {
             //player info sent to server, then server updates sync vars which handles it on all clients
+            playerNameText.text = _name;
             playerName = _name;
             playerColor = _col;
         }

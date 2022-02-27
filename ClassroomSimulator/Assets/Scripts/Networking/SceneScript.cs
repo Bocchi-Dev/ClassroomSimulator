@@ -15,7 +15,7 @@ namespace ClassroomSimulator
         public Text canvasAutoTraffic;
         public Text canvasPlayerCount;
         public GameObject[] playersArray;
-        public PlayerMovement playerScript;
+        public Player playerScript;
 
         [SyncVar(hook = nameof(OnStatusTextChanged))]
         public string statusText;
