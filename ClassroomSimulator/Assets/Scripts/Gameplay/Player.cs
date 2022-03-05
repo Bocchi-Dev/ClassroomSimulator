@@ -25,6 +25,8 @@ namespace ClassroomSimulator
 
         [SyncVar(hook = nameof(OnNameChanged))]
         public string playerName;
+
+     
         void OnNameChanged(string _Old, string _New)
         {
             playerNameText.text = playerName;
@@ -50,6 +52,8 @@ namespace ClassroomSimulator
 
             string name = FindObjectOfType<MenuClientButton>().playerName;
             Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+
+            
             CmdSetupPlayer(name, color);
 
             SetupAutoTraffic();
@@ -59,6 +63,8 @@ namespace ClassroomSimulator
         {
             //allow all players to run this
             sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
+
+           
         }
 
         private void Start()
@@ -93,6 +99,7 @@ namespace ClassroomSimulator
             //only our own player runs below here
             if (!isLocalPlayer) { return; }
 
+            
             //insert movement here
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
@@ -153,5 +160,7 @@ namespace ClassroomSimulator
                 InvokeRepeating(nameof(AutoRepeatingMessage), 1, 0.75f);
             }
         }
+
+    
     }
 }
