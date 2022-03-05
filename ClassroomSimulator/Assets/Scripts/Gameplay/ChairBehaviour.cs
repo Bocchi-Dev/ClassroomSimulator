@@ -12,15 +12,16 @@ namespace ClassroomSimulator
         public Transform exitPos;
         public bool isHitting;
         public float speed = 0.2f;
-        public bool isSitting = false;
-        public bool isStanding = true;
+        public bool isSitting;
+        public bool isStanding;
         Player player;
         CharacterController charac;
         Vector3 newPos;
 
         void Start()
         {
-
+            isSitting = false;
+            isStanding = true;
         }
 
         // Update is called once per frame
@@ -47,9 +48,9 @@ namespace ClassroomSimulator
                     charac.enabled = true;
                 }
             }
-            if (isSitting)
+            if (isSitting && !isStanding)
             {
-                if (!isStanding && Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     isSitting = false;
                     isStanding = true;
@@ -58,7 +59,7 @@ namespace ClassroomSimulator
                     player.moveSpeed = 10f;
                     Debug.Log("i stand");
                 }
-                if (Input.GetKeyUp(KeyCode.Space))
+                if (Input.GetKeyUp(KeyCode.E))
                 {
                     charac.enabled = true;
                 }
