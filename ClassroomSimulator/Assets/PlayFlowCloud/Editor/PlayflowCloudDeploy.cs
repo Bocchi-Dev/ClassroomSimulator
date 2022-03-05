@@ -1,43 +1,50 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
-using System.Net.Http;
 using System.Threading.Tasks;
-using ICSharpCode.SharpZipLib.Zip;
-using ICSharpCode.SharpZipLib.Zip.Compression;
-using System.Security.Cryptography;
 using System;
-using System.Net;
-using System.Text.RegularExpressions;
+using System.Linq;
+
+
 
 public class PlayFlowCloud : EditorWindow
 {
     private static PlayFlowConfig data;
 
-
-    private string version = "1";
     private static string defaultPath = @"Builds\Linux\Server\PlayFlowCloud\PlayFlowCloudServerFiles\Server.x86_64";
-    private string serverlUrl = "";
+    private string serverlUrl;
     private string port = "";
     private string serverArguments = "";
     private string token = "";
+    private string ssl = "";
+    private int selected_server = 0;
+    private bool devmode = false;
 
-    private static float t = 0;
-    private bool enableSSL = false;
+    private static float t;
 
-    private string logs = "PlayFlow Logs: ";
+    private string playflow_logs = "PlayFlow Logs: ";
 
-    public string[] options = new string[] { "North America", "Europe", "Southeast Asia | Oceanic", "East Asia" };
-    private string[] servers = new string[] { "https://api.playflow.app/", "https://eu.api.playflow.app/", "https://sea.api.playflow.app/", "https://ea.api.playflow.app/" };
+    public List<string> active_servers = new List<string>();
+    
+    public string[] regionOptions = new string[]
+        {"North America", "Europe", "Southeast Asia | Oceanic", "East Asia"};
+
+    private string[] regions = new string[] {"us-east", "eu-west", "sea", "ea"};
     public int index = 0;
-    private string apiUrl = "https://api.playflow.app/";
+    private string region = "us-east";
+
+    private string path = "";
 
     Vector2 scroll;
 
-    // This method will be called on load or recompile
+
+    public async void Awake()
+    {
+        getGlobalValues();
+        await get_server_list();
+    }
+
     [InitializeOnLoadMethod]
     private static void OnLoad()
     {
@@ -60,15 +67,16 @@ public class PlayFlowCloud : EditorWindow
         }
     }
 
-    // Add menu item named "My Window" to the Window menu
     [MenuItem("PlayFlow/PlayFlowCloud Server")]
     public static void ShowWindow()
     {
         //Show existing window instance. If one doesn't exist, make one.
         EditorWindow.GetWindow(typeof(PlayFlowCloud));
+        
     }
 
     private static GUISkin _uiStyle;
+
     public static GUISkin uiStyle
     {
         get
@@ -83,11 +91,12 @@ public class PlayFlowCloud : EditorWindow
     private static GUISkin GetUiStyle()
     {
         var searchRootAssetFolder = Application.dataPath;
-        var playFlowGuiPath = Directory.GetFiles(searchRootAssetFolder, "PlayFlowSkin.guiskin", SearchOption.AllDirectories);
+        var playFlowGuiPath =
+            Directory.GetFiles(searchRootAssetFolder, "PlayFlowSkin.guiskin", SearchOption.AllDirectories);
         foreach (var eachPath in playFlowGuiPath)
         {
             var loadPath = eachPath.Substring(eachPath.LastIndexOf("Assets"));
-            return (GUISkin)AssetDatabase.LoadAssetAtPath(loadPath, typeof(GUISkin));
+            return (GUISkin) AssetDatabase.LoadAssetAtPath(loadPath, typeof(GUISkin));
         }
         return null;
     }
@@ -98,377 +107,382 @@ public class PlayFlowCloud : EditorWindow
         token = serializedObject.FindProperty("token").stringValue;
         serverArguments = serializedObject.FindProperty("serverArguments").stringValue;
         port = serializedObject.FindProperty("playflowUrl").stringValue;
-        enableSSL = serializedObject.FindProperty("enableSSL").boolValue;
+        ssl = serializedObject.FindProperty("enableSSL").boolValue.ToString();
         index = serializedObject.FindProperty("serverLocation").intValue;
-        apiUrl = servers[index];
+        region = regions[index];
     }
-
+ 
     void OnGUI()
     {
         var serializedObject = new SerializedObject(data);
         // fetches the values of the real instance into the serialized one
         serializedObject.Update();
-
         var configtoken = serializedObject.FindProperty("token");
         var configserverArguments = serializedObject.FindProperty("serverArguments");
         var configport = serializedObject.FindProperty("playflowUrl");
         var configenableSSL = serializedObject.FindProperty("enableSSL");
         var configapiUrl = serializedObject.FindProperty("serverLocation");
 
+
         scroll = EditorGUILayout.BeginScrollView(scroll);
         GUI.skin = uiStyle;
 
         GUILayout.Label("PlayFlow Cloud Server Deploy Settings");
-        EditorGUILayout.LabelField("Use the PlayFlow Server Port number as your game's port for both the clients and server", uiStyle.GetStyle("labelsmall"));
+        EditorGUILayout.LabelField(
+            "Use the PlayFlow Server Port number as your game's port for both the clients and server",
+            uiStyle.GetStyle("labelsmall"));
 
-        configtoken.stringValue = EditorGUILayout.TextField("PlayFlow App Token", configtoken.stringValue, uiStyle.textField);
-        configport.stringValue = EditorGUILayout.TextField("PlayFlow Server URL:Port", configport.stringValue, uiStyle.textField);
-        configserverArguments.stringValue =  EditorGUILayout.TextField("Arguments (optional)", configserverArguments.stringValue, uiStyle.textField);
-        configenableSSL.boolValue = EditorGUILayout.Toggle("Enable SSL for WebSockets", configenableSSL.boolValue);
+        configtoken.stringValue =
+            EditorGUILayout.TextField("PlayFlow App Token", configtoken.stringValue, uiStyle.textField);
+        configserverArguments.stringValue = EditorGUILayout.TextField("Arguments (optional)",
+            configserverArguments.stringValue, uiStyle.textField);
 
+        
+        configenableSSL.boolValue = EditorGUILayout.Toggle("Enable SSL", configenableSSL.boolValue);
+        devmode = EditorGUILayout.Toggle("Development Build", devmode);
+
+
+        
+        getGlobalValues();
+        
         EditorGUILayout.BeginHorizontal();
-        GUILayout.Label("Server Location", uiStyle.GetStyle("labelsmall"));
-        index = EditorGUILayout.Popup(configapiUrl.intValue, options);
+        GUILayout.Label("Server Location (Free Plan)", uiStyle.GetStyle("labelsmall"));
+        index = EditorGUILayout.Popup(configapiUrl.intValue, regionOptions);
         configapiUrl.intValue = index;
         EditorGUILayout.EndHorizontal();
+        
 
-        token = configtoken.stringValue;
+
 
         EditorGUILayout.BeginHorizontal();
-
-        if (GUILayout.Button("Get PlayFlow App Token"))
+        
+        if (GUILayout.Button("Get Active Servers"))
         {
-            System.Diagnostics.Process.Start("https://app.playflowcloud.com");
-
+            getservers();
         }
 
-        if (GUILayout.Button("Assign PlayFlow Port"))
+        
+        
+        if (GUILayout.Button("Upload Server"))
         {
-            try
-            {
-                getPort();
-            }
-            catch (Exception e)
-            {
-
-                logs = "Port Generation Failed! StackTrace: " + e.StackTrace;
-            }
+            BuildAndZip();
         }
 
+       
+        // if (GUILayout.Button("Upload Server Zip"))
+        // {
+        //     upload_files_directly();
+        // }
+        
+        if (GUILayout.Button("Start Server"))
+        {
+            start_server();
+        }
+        
+ 
+
+ 
         EditorGUILayout.EndHorizontal();
 
-        if (GUILayout.Button("Publish Server"))
-        {
-            try
-            {
-                buildServer();
-            }
-            catch (Exception e)
-            {
-                logs = "PlayFlow Build & Publish Failed! StackTrace: " + e.StackTrace;
-                EditorUtility.ClearProgressBar();
-            }
-
-        }
 
         EditorGUILayout.BeginHorizontal();
+        
 
-        if (GUILayout.Button("Get Server Logs"))
-        {
-            try
-            {
-                getServerLogs();
 
-            }
-            catch (Exception e)
-            {
+        EditorGUILayout.BeginVertical();
+        GUILayout.Label("Active Servers", uiStyle.GetStyle("labelsmall"));
+        selected_server = EditorGUILayout.Popup(selected_server, active_servers.ToArray());
+        EditorGUILayout.EndVertical();
 
-                logs = "Port Generation Failed! StackTrace: " + e.StackTrace;
-            }
-        }
+   
+   
+
 
         if (GUILayout.Button("Restart Server"))
         {
-            try
-            {
-                restartServer();
-
-            }
-            catch (Exception e)
-            {
-                logs = "Server restart failed! Logs: " + e.StackTrace;
-                EditorUtility.ClearProgressBar();
-            }
+            restart_server();
         }
 
 
-        EditorGUILayout.EndHorizontal();
+        if (GUILayout.Button("Stop Server"))
+        {
+            stop_server();
+        }
 
+
+        if (GUILayout.Button("Get Logs"))
+        {
+            get_logs();
+        }
+        
+   
+
+        EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
-        if (GUILayout.Button("Documentation"))
-        {
-            System.Diagnostics.Process.Start("https://playflowdev.github.io/PlayFlowDocumentation/#/");
-
-        }
-
-        if (GUILayout.Button("YouTube"))
-        {
-            System.Diagnostics.Process.Start("https://www.youtube.com/channel/UC8MVcq6a4PwzUh3jTlBKu8w");
-
-        }
-
-        if (GUILayout.Button("Discord"))
-        {
-            System.Diagnostics.Process.Start("https://discord.gg/FAFFyt9DDX");
-
-        }
-
-
+        EditorGUILayout.TextArea(playflow_logs, uiStyle.textArea);
         EditorGUILayout.EndHorizontal();
-        EditorGUILayout.TextArea(logs, uiStyle.textArea);
         EditorGUILayout.EndScrollView();
         serializedObject.ApplyModifiedProperties();
-       
-
-
     }
 
     public void OnInspectorUpdate()
     {
-        // This will only get called 10 times per second.
         Repaint();
     }
 
-    private async void getServerLogs()
+    private void BuildAndZip()
     {
-        getGlobalValues();
-        EditorUtility.DisplayProgressBar("PlayFlowCloud", "Getting Logs", 0.5f);
-        await getServerLogsAPI();
-        EditorUtility.ClearProgressBar();
-    }
-
-    private async Task getServerLogsAPI()
-    {
-        string actionUrl = apiUrl + "logs";
-        using (var client = new HttpClient())
-        using (var formData = new MultipartFormDataContent())
+        try
         {
-            formData.Headers.Add("serverToken", token);
-            formData.Headers.Add("version", version);
-
-            var response = await client.PostAsync(actionUrl, formData);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                Debug.Log("Get Logs Failed.");
-                logs = "PlayFlow Logs: Server Log Get Failed. If error persists, contact the PlayFlow Discord Support: https://discord.gg/FAFFyt9DDX  \n API Response Code: " + response + "\nAPI Response: " + await response.Content.ReadAsStringAsync();
-            }
-            else
-            {
-                string templogs = await response.Content.ReadAsStringAsync();
-
-                logs = "PlayFlow Logs: " + templogs;
-                Debug.Log(logs);
-            }
-        }
-    }
-
-    private async void restartServer()
-    {
-        getGlobalValues();
-        EditorUtility.DisplayProgressBar("PlayFlowCloud", "Restarting Server", 0.5f);
-        await restartServerAPI();
-        EditorUtility.ClearProgressBar();
-    }
-
-    private async Task restartServerAPI()
-    {
-        string actionUrl = apiUrl + "restart";
-        using (var client = new HttpClient())
-        using (var formData = new MultipartFormDataContent())
-        {
-            formData.Headers.Add("serverToken", token);
-            formData.Headers.Add("version", version);
-            formData.Headers.Add("serverArguments", serverArguments);
-
-
-            var response = await client.PostAsync(actionUrl, formData);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                Debug.Log("Restart Failed.");
-                logs = "PlayFlow Logs: Server Restart failed. If error persists, contact the PlayFlow Discord Support: https://discord.gg/FAFFyt9DDX  \n API Response Code: " + response + "\nAPI Response: " + await response.Content.ReadAsStringAsync(); 
-            }
-            else
-            {
-                string templogs = System.Text.Encoding.UTF8.GetString(await response.Content.ReadAsByteArrayAsync());
-
-                logs = "PlayFlow Logs: " + templogs;
-            }
-        }
-    }
-    private async void buildServer()
-    {
-
-        if (string.IsNullOrEmpty(port))
-        {
-            Debug.LogError("Port value is not defined. Please put your Server's port in the Port Text box for PlayFlow Cloud");
-        }
-        else
-        {
-
-
-            List<string> scenes = new List<string>();
-            foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
-            {
-                if (scene.enabled)
-                {
-                    scenes.Add(scene.path);
-                }
-            }
-
-            BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-            buildPlayerOptions.scenes = scenes.ToArray();
-            buildPlayerOptions.locationPathName = defaultPath;
-
-          
-    
-            buildPlayerOptions.target = BuildTarget.StandaloneLinux64;
-
-#if UNITY_2021_1_OR_NEWER
-
-            if (Application.unityVersion.CompareTo(("2021.2")) >= 0)
-            {
-                buildPlayerOptions.subtarget = (int) StandaloneBuildSubtarget.Server;
-                buildPlayerOptions.options = BuildOptions.CompressWithLz4HC;
-            } else
-            {
-                buildPlayerOptions.options = BuildOptions.CompressWithLz4HC | BuildOptions.EnableHeadlessMode;
-            }
-
-#else
-
-            buildPlayerOptions.options = BuildOptions.CompressWithLz4HC | BuildOptions.EnableHeadlessMode;
-
-#endif
-            BuildPipeline.BuildPlayer(buildPlayerOptions);
-
-            t = 0.35f;
-
-            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Compressing files", t);
-
-            await ZipServerBuild();
-        }
-      
-
-        EditorUtility.ClearProgressBar();
-        
-    }
-
-    public async Task ZipServerBuild()
-    {
-        string directoryToZip = Path.GetDirectoryName(defaultPath);
-        if (Directory.Exists(directoryToZip))
-        {
+            
+            PlayFlowBuilder.BuildServer(devmode);
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Zipping Files", 0.4f);
+            string zipFile = PlayFlowBuilder.ZipServerBuild();
+            
+            string directoryToZip = Path.GetDirectoryName(defaultPath);
             string targetfile = Path.Combine(directoryToZip, @"../Server.zip");
-            await ZipPath(targetfile, directoryToZip, null, true, null);
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Uploading Files", 0.75f);
+            playflow_logs = PlayFlowAPI.Upload(targetfile, token, region);
+            
+            PlayFlowBuilder.cleanUp(zipFile);
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
         }
     }
 
-    public async Task ZipPath(string zipFilePath, string sourceDir, string pattern, bool withSubdirs, string password)
+    private void upload_files_directly()
     {
-        FastZip fz = new FastZip();
-        fz.CompressionLevel = Deflater.CompressionLevel.DEFAULT_COMPRESSION;
-        fz.CreateZip(zipFilePath, sourceDir, withSubdirs, pattern);
-
-        t = 0.5f;
-        EditorUtility.DisplayProgressBar("PlayFlowCloud", "Uploading", t);
-        string response = await Upload(zipFilePath);
-        serverlUrl = response;
-        logs = "PlayFlow Logs: Game server is up and running! Use the following URL & Port for your clients: " + serverlUrl;
-
-        var serializedObject = new SerializedObject(data);
-
-        var configport = serializedObject.FindProperty("playflowUrl");
-
-        configport.stringValue = serverlUrl;
-        serializedObject.ApplyModifiedProperties();
-
-
-        Debug.Log("PlayFlow Logs: Server successfully built!  Game server is up and running! Use the following URL & Port for your clients: " + response);
-
-        if (Directory.Exists(sourceDir))
+        try
         {
-            Directory.Delete(sourceDir, true);
+            path = EditorUtility.OpenFilePanel("Select Server", "", "zip");
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Uploading Files", 0.75f);
+            playflow_logs = PlayFlowAPI.Upload(path, token, region);
+                 
         }
-
-        if (File.Exists(zipFilePath))
+        catch (Exception e)
         {
-            File.Delete(zipFilePath);
+            playflow_logs = "PlayFlow Build & Publish Failed! StackTrace: " + e.StackTrace;
+            EditorUtility.ClearProgressBar();
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
         }
     }
-
-    private async Task<string> Upload(string fileLocation)
+    
+    private async void start_server()
     {
-        getGlobalValues();
-        string actionUrl = apiUrl + "files";
-        Uri uri = new Uri(actionUrl);
-
-        byte[] file_bytes = File.ReadAllBytes(fileLocation);
-        HttpClientHandler handler = new HttpClientHandler();
-
-        byte[] responseArray;
-        using (WebClient client = new WebClient())
-        {
-            client.Headers.Add("serverToken", token);
-            client.Headers.Add("serverArguments", serverArguments);
-            client.Headers.Add("enableSSL", enableSSL.ToString());
-            client.Headers.Add("version", version);
-            responseArray = client.UploadFile(actionUrl, fileLocation);
-
-        }
-
-        return (System.Text.Encoding.ASCII.GetString(responseArray));
-    }
-
-    private async void getPort()
-    {
-        var serializedObject = new SerializedObject(data);
-        
-        getGlobalValues();
-        EditorUtility.DisplayProgressBar("PlayFlowCloud", "Generating Port", 0.5f);
-        port = await GetRandomPort();
-
-        var configport = serializedObject.FindProperty("playflowUrl");
-
-        configport.stringValue = port;
-        serializedObject.ApplyModifiedProperties();
         EditorUtility.ClearProgressBar();
+
+        MatchInfo matchInfo = null;
+        try
+        {
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Starting Server", 0.75f);
+            string response =  await PlayFlowAPI.StartServer(token, region, serverArguments, ssl);
+            playflow_logs = response;
+
+            matchInfo = JsonUtility.FromJson<MatchInfo>(response);
+
+        }
+        catch (Exception e)
+        {
+            playflow_logs = "PlayFlow Start Server Failed! StackTrace: " + e.StackTrace;
+            EditorUtility.ClearProgressBar();
+        }
+        finally
+        {
+            await get_server_list();
+
+            if (matchInfo != null)
+            {
+                string match = matchInfo.match_id;
+
+                if (matchInfo.ssl_port != null)
+                {
+                   match = matchInfo.match_id + " -> (SSL) " + matchInfo.ssl_port;
+                }
+                
+                selected_server = active_servers.IndexOf(match);
+            }
+            
+            EditorUtility.ClearProgressBar();
+        }
     }
 
-    private async Task<string> GetRandomPort()
+
+
+    private async void restart_server()
     {
-
-        string actionUrl = apiUrl + "getport";
-        using (var client = new HttpClient())
-        using (var formData = new MultipartFormDataContent())
+        EditorUtility.ClearProgressBar();
+        try
         {
-            formData.Headers.Add("serverToken", token);
-            formData.Headers.Add("version", version);
-            var response = await client.PostAsync(actionUrl, formData);
 
-            if (!response.IsSuccessStatusCode)
+            if (!active_servers.Any())
             {
-                Debug.Log("Port Generation Failed.");
-                logs = "PlayFlow Logs: Port Generation Failed. Please try again in a few seconds. If error persists, contact the PlayFlow Discord Support: https://discord.gg/FAFFyt9DDX \n API Response Code: " + response +  "\nAPI Response: "+ await response.Content.ReadAsStringAsync();
-                return "Port generation failed. See PlayFlow Logs below for more info";
+                playflow_logs = "No server selected";
+                return;
             }
-            else
-            {
-                logs = "PlayFlow Logs: Successfully Generated Port! Use the port specified above in your game server's configuration";
-                return await response.Content.ReadAsStringAsync();
-            }
+
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Restarting Server", 0.75f);
+            playflow_logs = await PlayFlowAPI.RestartServer(token, region, serverArguments, ssl, active_servers[selected_server]);
         }
+        catch (Exception e)
+        {
+            playflow_logs = "PlayFlow Restart Failed! StackTrace: " + e.StackTrace;
+            EditorUtility.ClearProgressBar();
+        }
+        finally
+        {
+           
+            EditorUtility.ClearProgressBar();
+        }
+    }
+    
+    private async void stop_server()
+    {
+        EditorUtility.ClearProgressBar();
+        try
+        {
+            if (!active_servers.Any())
+            {
+                playflow_logs = "No server selected";
+                return;
+            }
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Stopping Server", 0.75f);
+            playflow_logs = await PlayFlowAPI.StopServer(token, region, active_servers[selected_server]);
+        }
+        catch (Exception e)
+        {
+            playflow_logs = "PlayFlow Stop Server Failed! StackTrace: " + e.StackTrace;
+            EditorUtility.ClearProgressBar();
+        }
+        finally
+        {
+            await get_server_list();
+            EditorUtility.ClearProgressBar();
+        }
+    }
+    
+    private async void get_logs()
+    {
+        EditorUtility.ClearProgressBar();
+        try
+        {
+            if (!active_servers.Any())
+            {
+                playflow_logs = "No server selected";
+                return;
+            }
+            
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Getting Server Logs", 0.75f);
+            playflow_logs = await PlayFlowAPI.GetServerLogs(token, region, active_servers[selected_server]);
+        }
+        catch (Exception e)
+        {
+            playflow_logs = "PlayFlow Stop Server Failed! StackTrace: " + e.StackTrace;
+            EditorUtility.ClearProgressBar();
+        }
+        finally
+        {
+            
+            EditorUtility.ClearProgressBar();
+        }
+    }
 
+    private async void getservers()
+    {
+        try
+        {
+            await get_server_list();
+            playflow_logs = "Updated Active Servers";
+        }
+        catch (Exception e)
+        {
+            playflow_logs = "PlayFlow Build & Publish Failed! StackTrace: " + e.StackTrace;
+        }
+        
+    }
+    
+    private async Task get_server_list()
+    {
+        try
+        {
+            EditorUtility.DisplayProgressBar("PlayFlowCloud", "Updating Servers Info", 0.75f);
+            string response = await PlayFlowAPI.GetActiveServers(token, region);
+            Server[] servers = JsonHelper.FromJson<Server>(response);
+            active_servers = new List<string>();
+            foreach (Server server in servers)
+            {
+                string serverInfo = server.port;
+
+                if (server.ssl_enabled)
+                {
+                    serverInfo = server.port + " -> (SSL) " + server.ssl_port;
+                }
+
+                active_servers.Add(serverInfo);
+            }
+            active_servers.Sort();
+            selected_server =  active_servers.Count - 1;
+        }
+        catch (Exception e)
+        {
+            playflow_logs = "PlayFlow Build & Publish Failed! StackTrace: " + e.StackTrace;
+            EditorUtility.ClearProgressBar();
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+        }
+    }
+}
+
+[Serializable]
+public class Server
+{
+    public string ssl_port;
+    public bool ssl_enabled;
+    public string server_arguments;
+    public string status;
+    public string port;
+}
+
+
+[Serializable]
+public class MatchInfo
+{
+    public string match_id;
+    public string server_url;
+    public string ssl_port;
+}
+
+public static class JsonHelper
+{
+    public static T[] FromJson<T>(string json)
+    {
+        Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
+        return wrapper.servers;
+    }
+
+    public static string ToJson<T>(T[] array)
+    {
+        Wrapper<T> wrapper = new Wrapper<T>();
+        wrapper.servers = array;
+        return JsonUtility.ToJson(wrapper);
+    }
+
+    public static string ToJson<T>(T[] array, bool prettyPrint)
+    {
+        Wrapper<T> wrapper = new Wrapper<T>();
+        wrapper.servers = array;
+        return JsonUtility.ToJson(wrapper, prettyPrint);
+    }
+
+    [Serializable]
+    private class Wrapper<T>
+    {
+        public T[] servers;
     }
 }
