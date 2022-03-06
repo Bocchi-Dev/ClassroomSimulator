@@ -40,29 +40,34 @@ namespace ClassroomSimulator
                     isSitting = true;
                     charac.enabled = false;
                     prefabPlayer.transform.position = new Vector3(sittingPos.position.x, sittingPos.position.y, sittingPos.position.z);
+                    prefabPlayer.transform.rotation =Quaternion.Euler(sittingPos.rotation.x, sittingPos.rotation.y, sittingPos.rotation.z);
                     player.moveSpeed = 0f;
                     Debug.Log("i sat");
                 }
-                if (Input.GetKeyUp(KeyCode.Space))
-                {
-                    charac.enabled = true;
-                }
+                
             }
-            if (isSitting && !isStanding)
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                charac.enabled = true;
+               
+            }
+            if (isSitting)
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     isSitting = false;
                     isStanding = true;
                     charac.enabled = false;
                     prefabPlayer.transform.position = new Vector3(exitPos.position.x, exitPos.position.y, exitPos.position.z);
+                    prefabPlayer.transform.rotation = Quaternion.Euler(sittingPos.rotation.x, sittingPos.rotation.y, sittingPos.rotation.z);
                     player.moveSpeed = 10f;
                     Debug.Log("i stand");
                 }
-                if (Input.GetKeyUp(KeyCode.E))
-                {
-                    charac.enabled = true;
-                }
+               
+            }
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                charac.enabled = true;
             }
 
         }
