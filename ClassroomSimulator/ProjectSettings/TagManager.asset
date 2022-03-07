@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Button
   - MainMenuButton
+  - Chair
+  - Chair2
   layers:
   - Default
   - TransparentFX
