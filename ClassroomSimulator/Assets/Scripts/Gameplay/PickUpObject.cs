@@ -10,10 +10,11 @@ public class PickUpObject : MonoBehaviour
     public float distance;
     public float smooth;
     public float throwForce = 10;
-
+    
     private void Start()
     {
-        mainCamera = gameObject.transform.GetChild(0).gameObject;
+        int lastChildIndex = mainCamera.gameObject.transform.childCount - 1;
+        mainCamera = gameObject.transform.GetChild(lastChildIndex).gameObject;
     }
 
     private void Update()
