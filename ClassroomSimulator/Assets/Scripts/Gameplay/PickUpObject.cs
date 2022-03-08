@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class PickUpObject : MonoBehaviour
 {
-    GameObject mainCamera;
+    public GameObject mainCamera;
     bool carrying;
     GameObject carriedObject;
     public float distance;
     public float smooth;
     public float throwForce = 10;
+    public int lastChildIndex;
     
     private void Start()
     {
-        int lastChildIndex = mainCamera.gameObject.transform.childCount - 1;
+        lastChildIndex = gameObject.gameObject.transform.childCount - 1;
         mainCamera = gameObject.transform.GetChild(lastChildIndex).gameObject;
     }
 
     private void Update()
     {
+       
         if (carrying)
         {
             carry(carriedObject);
