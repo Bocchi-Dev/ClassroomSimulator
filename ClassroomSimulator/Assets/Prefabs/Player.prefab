@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1231020668129551279}
   - component: {fileID: 1295473299260153641}
   - component: {fileID: 7744471968680613187}
+  - component: {fileID: 8178602195142222474}
   - component: {fileID: 837955307582290196}
   m_Layer: 0
   m_Name: Player
@@ -171,6 +172,21 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &8178602195142222474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665223277009370008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5823c2539998fc148b6602f0d0a07ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 2
+  smooth: 10
+  throwForce: 1000
 --- !u!114 &837955307582290196
 MonoBehaviour:
   m_ObjectHideFlags: 0
