@@ -47,6 +47,9 @@ namespace ClassroomSimulator
         {
             sceneScript.playerScript = this;
 
+            Camera.main.transform.SetParent(transform);
+            Camera.main.transform.localPosition = new Vector3(0, 1, 0);
+
             floatingInfo.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
             floatingInfo.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
@@ -91,15 +94,13 @@ namespace ClassroomSimulator
         {
             //FindSceneScript();
             //allow all players to run this
-            if (isLocalPlayer == false)
+            if (!isLocalPlayer)
             {
+                // make non-local players run this
                 floatingInfo.transform.LookAt(Camera.main.transform);
+                return;
             }
 
-            //only our own player runs below here
-            if (!isLocalPlayer) { return; }
-
-            
             //insert movement here
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
