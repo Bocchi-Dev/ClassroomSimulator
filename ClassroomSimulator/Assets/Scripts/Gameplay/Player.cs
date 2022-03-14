@@ -49,6 +49,7 @@ namespace ClassroomSimulator
 
             Camera.main.transform.SetParent(transform);
             Camera.main.transform.localPosition = new Vector3(0, 1, 0);
+            Camera.main.GetComponent<MouseLook>().playerBody = transform;
 
             floatingInfo.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
             floatingInfo.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);

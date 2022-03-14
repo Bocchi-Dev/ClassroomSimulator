@@ -6,13 +6,13 @@ public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
 
-    private Transform playerBody;
+    public Transform playerBody;
     private float xRotation = 0f;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        playerBody = GetComponentInParent<Transform>();
+        //playerBody = GetComponentInParent<Transform>();
     }
 
     // Update is called once per frame
