@@ -12,6 +12,8 @@ using kcp2k;
 
 public class CustomNetworkManager : NetworkManager
 {
+
+    GameObject Sphere;
     /// <summary>
     /// Runs on both Server and Client
     /// Networking is NOT initialized when this fires
@@ -23,6 +25,12 @@ public class CustomNetworkManager : NetworkManager
 #if UNITY_SERVER
         StartCoroutine("StartHeadless");
 #endif
+    }
+
+    public override void OnStartServer()
+    {
+        Sphere = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Ball"), new Vector3(0, 0, 0), Quaternion.identity);
+        NetworkServer.Spawn(Sphere);
     }
 
     IEnumerator StartHeadless()

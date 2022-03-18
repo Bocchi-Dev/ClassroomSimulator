@@ -29,9 +29,8 @@ namespace ClassroomSimulator
         {
 
 
-            prefabPlayer = GameObject.FindGameObjectWithTag("Player");
-            charac = prefabPlayer.GetComponent<CharacterController>();
-            player = prefabPlayer.GetComponent<Player>();
+            
+           
             if (isStanding)
             {
                 if (isHitting && Input.GetKeyDown(KeyCode.Space))
@@ -78,6 +77,9 @@ namespace ClassroomSimulator
             if (other.CompareTag("Player"))
             {
                 isHitting = true;
+                prefabPlayer = other.gameObject;
+                charac = prefabPlayer.GetComponent<CharacterController>();
+                player = prefabPlayer.GetComponent<Player>();
             }
         }
         private void OnTriggerExit(Collider other)
@@ -86,6 +88,7 @@ namespace ClassroomSimulator
             if (other.CompareTag("Player"))
             {
                 isHitting = false;
+                prefabPlayer = null;
             }
         }
 
