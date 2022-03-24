@@ -49,7 +49,7 @@ namespace ClassroomSimulator
             sceneScript.playerScript = this;
 
             Camera.main.transform.SetParent(transform);
-            Camera.main.transform.localPosition = new Vector3(0, 1, 0);
+            Camera.main.transform.localPosition = new Vector3(0, 0.60f, 0);
             #if UNITY_EDITOR
                 Camera.main.GetComponent<MouseLook>().playerBody = transform;
             #endif
@@ -129,6 +129,12 @@ namespace ClassroomSimulator
             Vector3 velocity = direction * moveSpeed;
             velocity = Camera.main.transform.TransformDirection(velocity);
             velocity.y -= gravity;
+
+            Quaternion characterRotation = Camera.main.transform.rotation;
+            characterRotation.x = 0;
+            characterRotation.z = 0;
+
+            transform.rotation = characterRotation;
 
             controller.Move(velocity * Time.deltaTime);
         }
