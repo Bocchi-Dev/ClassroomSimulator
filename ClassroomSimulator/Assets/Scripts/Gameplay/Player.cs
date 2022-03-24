@@ -77,6 +77,7 @@ namespace ClassroomSimulator
             controller = GetComponent<CharacterController>();
 #if PLATFORM_ANDROID
             Camera.main.GetComponent<MouseLook>().enabled = false;
+            Input.gyro.enabled = true;
 #endif
 #if UNITY_EDITOR
             Camera.main.GetComponent<MouseLook>().enabled = true;
@@ -130,11 +131,9 @@ namespace ClassroomSimulator
             velocity = Camera.main.transform.TransformDirection(velocity);
             velocity.y -= gravity;
 
-            Quaternion characterRotation = Camera.main.transform.rotation;
-            characterRotation.x = 0;
-            characterRotation.z = 0;
-
-            transform.rotation = characterRotation;
+#if PLATFORM_ANDROID
+            transform.Rotate(0, -Input.gyro.rotationRateUnbiased.y / 2, 0);
+#endif
 
             controller.Move(velocity * Time.deltaTime);
         }
