@@ -14,6 +14,7 @@ public class CustomNetworkManager : NetworkManager
 {
 
     GameObject Sphere;
+    public Transform spawnSphere;
     /// <summary>
     /// Runs on both Server and Client
     /// Networking is NOT initialized when this fires
@@ -27,11 +28,17 @@ public class CustomNetworkManager : NetworkManager
 #endif
     }
 
-    public override void OnStartServer()
+    public override void OnStartClient()
     {
-        Sphere = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Ball"), new Vector3(0, 0, 0), Quaternion.identity);
-        NetworkServer.Spawn(Sphere);
+        Debug.Log("fuck it");
+        spawnSphere = GameObject.Find("SpawnSphere").GetComponent<Transform>();
+        Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Sphere"), spawnSphere);
+        
+       
     }
+
+    
+
 
     IEnumerator StartHeadless()
     {

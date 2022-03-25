@@ -90,7 +90,7 @@ namespace ClassroomSimulator
                 isHitting = false;
                 prefabPlayer = null;
             }
-        }
+        }   
 
 
     }
