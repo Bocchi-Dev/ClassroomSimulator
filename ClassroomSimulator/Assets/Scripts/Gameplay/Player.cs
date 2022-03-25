@@ -21,7 +21,8 @@ namespace ClassroomSimulator
         public string trafficType = "none";
 
         public float moveSpeed = 10f;
-        public float gravity = 10f;
+        public float gravity = -9.8f;
+        public float jumpHeight = 1f;
         public CharacterController controller;
 
         [SyncVar(hook = nameof(OnNameChanged))]
@@ -129,8 +130,22 @@ namespace ClassroomSimulator
             Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
             Vector3 velocity = direction * moveSpeed;
             velocity = Camera.main.transform.TransformDirection(velocity);
-            velocity.y -= gravity;
 
+            velocity.y += gravity;
+
+            if (controller.isGrounded)
+            {
+                velocity.y = 0;
+            }
+
+            if (Input.GetButtonDown("Jump") && controller.isGrounded)
+            {
+                //float jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpHeight);
+                velocity.y += jumpHeight;
+            }
+
+
+            
 #if PLATFORM_ANDROID
             transform.Rotate(0, -Input.gyro.rotationRateUnbiased.y / 2, 0);
 #endif
@@ -180,7 +195,5 @@ namespace ClassroomSimulator
                 InvokeRepeating(nameof(AutoRepeatingMessage), 1, 0.75f);
             }
         }
-
-    
     }
 }
