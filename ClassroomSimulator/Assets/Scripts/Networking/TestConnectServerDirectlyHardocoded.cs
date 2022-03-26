@@ -19,5 +19,6 @@ public class TestConnectServerDirectlyHardocoded : MonoBehaviour
     {
         //manager.networkAddress = "sea.playflow.cloud.app";
         manager.StartClient();
+        manager.StartHost();
     }
 }

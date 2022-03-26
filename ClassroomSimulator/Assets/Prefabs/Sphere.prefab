@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneId: 0
-  serverOnly: 1
+  serverOnly: 0
   visible: 0
   m_AssetId: 6270b654404a30c419c6e3c4b21fb597
   hasSpawned: 0

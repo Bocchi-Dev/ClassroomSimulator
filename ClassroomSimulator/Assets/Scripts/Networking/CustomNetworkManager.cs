@@ -14,7 +14,8 @@ public class CustomNetworkManager : NetworkManager
 {
 
     GameObject Sphere;
-    public Transform spawnSphere;
+    NetworkManager manager;
+  
     /// <summary>
     /// Runs on both Server and Client
     /// Networking is NOT initialized when this fires
@@ -22,21 +23,30 @@ public class CustomNetworkManager : NetworkManager
     public override void Start()
     {
         base.Start();
-
+        
+        if (!NetworkServer.active)
+        {
+            Debug.Log("qewqweqwe");
+        }
 #if UNITY_SERVER
         StartCoroutine("StartHeadless");
 #endif
     }
 
+
     public override void OnStartServer()
     {
-        Debug.Log("fuck it");
-
-        Invoke("SphereSpawn", 3);
+        
+        Invoke("SphereSpawn", 2);
+       
+            Debug.Log(networkAddress);
+        
 
     }
 
-   void SphereSpawn()
+
+
+    void SphereSpawn()
     {
         Sphere = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Sphere"));
         Sphere.transform.position = new Vector3(-11, 1, 8);
