@@ -23,7 +23,7 @@ public class CustomNetworkManager : NetworkManager
     public override void Start()
     {
         base.Start();
-        
+       
         if (!NetworkServer.active)
         {
             Debug.Log("qewqweqwe");
@@ -34,12 +34,12 @@ public class CustomNetworkManager : NetworkManager
     }
 
 
-    public override void OnStartServer()
+    public override void OnStartClient()
     {
         
         Invoke("SphereSpawn", 2);
-       
-            Debug.Log(networkAddress);
+        NetworkManager.singleton.StartServer();
+        Debug.Log(networkAddress);
         
 
     }

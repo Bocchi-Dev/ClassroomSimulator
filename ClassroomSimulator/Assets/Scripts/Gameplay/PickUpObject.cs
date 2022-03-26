@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+
 
 public class PickUpObject : MonoBehaviour
 {
@@ -34,13 +34,12 @@ public class PickUpObject : MonoBehaviour
         }
     }
 
-    [ClientRpc]
+    
     void carry(GameObject o)
     {
         o.transform.position = Vector3.Lerp(o.transform.position, mainCamera.transform.position + mainCamera.transform.forward * distance, Time.deltaTime * smooth);
     }
 
-    [Command]
     void pickUp()
     {
         if (Input.GetMouseButtonDown(1))
@@ -62,8 +61,6 @@ public class PickUpObject : MonoBehaviour
             }
         }
     }
-
-    [Command]
     void checkDrop()
     {
         if (Input.GetMouseButtonDown(1))
@@ -72,8 +69,6 @@ public class PickUpObject : MonoBehaviour
         }
 
     }
-
-    [Command]
     void dropObject()
     {
         carrying = false;
@@ -81,7 +76,6 @@ public class PickUpObject : MonoBehaviour
         carriedObject = null;
     }
 
-    [Command]
     void checkThrow()
     {
         if (Input.GetMouseButtonDown(0))
@@ -90,8 +84,6 @@ public class PickUpObject : MonoBehaviour
             Debug.Log("I am Throwing");
         }
     }
-
-    [Command]
     void ThrowObject()
     {
         carrying = false;
