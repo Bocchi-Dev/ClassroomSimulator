@@ -25,6 +25,8 @@ namespace ClassroomSimulator
 
         [SyncVar(hook = nameof(OnNameChanged))]
         public string playerName;
+
+     
         void OnNameChanged(string _Old, string _New)
         {
             playerNameText.text = playerName;
@@ -45,11 +47,17 @@ namespace ClassroomSimulator
         {
             sceneScript.playerScript = this;
 
+            Camera.main.transform.SetParent(transform);
+            Camera.main.transform.localPosition = new Vector3(0, 1, 0);
+            Camera.main.GetComponent<MouseLook>().playerBody = transform;
+
             floatingInfo.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
             floatingInfo.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 
             string name = FindObjectOfType<MenuClientButton>().playerName;
             Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+
+            
             CmdSetupPlayer(name, color);
 
             SetupAutoTraffic();
@@ -59,6 +67,8 @@ namespace ClassroomSimulator
         {
             //allow all players to run this
             sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
+
+           
         }
 
         private void Start()
@@ -85,13 +95,12 @@ namespace ClassroomSimulator
         {
             //FindSceneScript();
             //allow all players to run this
-            if (isLocalPlayer == false)
+            if (!isLocalPlayer)
             {
+                // make non-local players run this
                 floatingInfo.transform.LookAt(Camera.main.transform);
+                return;
             }
-
-            //only our own player runs below here
-            if (!isLocalPlayer) { return; }
 
             //insert movement here
             float horizontalInput = Input.GetAxis("Horizontal");
@@ -153,5 +162,7 @@ namespace ClassroomSimulator
                 InvokeRepeating(nameof(AutoRepeatingMessage), 1, 0.75f);
             }
         }
+
+    
     }
 }

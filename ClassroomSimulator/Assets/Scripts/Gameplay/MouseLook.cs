@@ -12,6 +12,7 @@ public class MouseLook : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        //playerBody = GetComponentInParent<Transform>();
     }
 
     // Update is called once per frame
