@@ -28,7 +28,7 @@ public class CustomNetworkManager : NetworkManager
 #endif
     }
 
-    public override void OnStartClient()
+    public override void OnStartServer()
     {
         Debug.Log("fuck it");
 
