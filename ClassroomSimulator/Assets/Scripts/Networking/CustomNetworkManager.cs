@@ -31,14 +31,17 @@ public class CustomNetworkManager : NetworkManager
     public override void OnStartClient()
     {
         Debug.Log("fuck it");
-       
-        Sphere = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Sphere"));
-        Sphere.transform.position = new Vector3(-11, 1, 8);
-        NetworkServer.Spawn(Sphere);
+
+        Invoke("SphereSpawn", 3);
 
     }
 
-    
+   void SphereSpawn()
+    {
+        Sphere = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Sphere"));
+        Sphere.transform.position = new Vector3(-11, 1, 8);
+        NetworkServer.Spawn(Sphere);
+    }
 
 
     IEnumerator StartHeadless()
