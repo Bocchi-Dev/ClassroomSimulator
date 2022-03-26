@@ -31,10 +31,11 @@ public class CustomNetworkManager : NetworkManager
     public override void OnStartClient()
     {
         Debug.Log("fuck it");
-        spawnSphere = GameObject.Find("SpawnSphere").GetComponent<Transform>();
-        Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Sphere"), spawnSphere);
-        
        
+        Sphere = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "Sphere"));
+        Sphere.transform.position = new Vector3(-11, 1, 8);
+        NetworkServer.Spawn(Sphere);
+
     }
 
     
