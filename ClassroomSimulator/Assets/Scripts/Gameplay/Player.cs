@@ -21,6 +21,8 @@ namespace ClassroomSimulator
         public string trafficType = "none";
 
         public float moveSpeed = 10f;
+        public float gravity = -9.8f;
+        public float jumpHeight = 1f;
         public CharacterController controller;
 
         [SyncVar(hook = nameof(OnNameChanged))]
@@ -48,8 +50,10 @@ namespace ClassroomSimulator
             sceneScript.playerScript = this;
 
             Camera.main.transform.SetParent(transform);
-            Camera.main.transform.localPosition = new Vector3(0, 1, 0);
-            Camera.main.GetComponent<MouseLook>().playerBody = transform;
+            Camera.main.transform.localPosition = new Vector3(0, 0.60f, 0);
+            #if UNITY_EDITOR
+                Camera.main.GetComponent<MouseLook>().playerBody = transform;
+            #endif
 
             floatingInfo.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
             floatingInfo.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
@@ -66,14 +70,19 @@ namespace ClassroomSimulator
         void Awake()
         {
             //allow all players to run this
-            sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
-
-           
+            sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;        
         }
 
         private void Start()
         {
             controller = GetComponent<CharacterController>();
+#if PLATFORM_ANDROID
+            Camera.main.GetComponent<MouseLook>().enabled = false;
+            Input.gyro.enabled = true;
+#endif
+#if UNITY_EDITOR
+            Camera.main.GetComponent<MouseLook>().enabled = true;
+#endif
         }
 
         [Command]
@@ -103,21 +112,45 @@ namespace ClassroomSimulator
             }
 
             //insert movement here
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-
-            transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime);
-            Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
-            Vector3 velocity = direction * moveSpeed;
-            velocity = Camera.main.transform.TransformDirection(velocity);
-
-            controller.Move(velocity * Time.deltaTime);
+            PlayerMovement();
 
             if (staticC.traffic > 1)
             {
                 if (autoTurnAmount > 0) { transform.Rotate(0, autoTurnAmount, 0); }
                 if (autoMoveAmount > 0) { transform.Translate(0, 0, autoMoveAmount); }
             }
+        }
+
+        void PlayerMovement()
+        {
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+
+            //transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime);
+            Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
+            Vector3 velocity = direction * moveSpeed;
+            velocity = Camera.main.transform.TransformDirection(velocity);
+
+            velocity.y += gravity;
+
+            if (controller.isGrounded)
+            {
+                velocity.y = 0;
+            }
+
+            if (Input.GetButtonDown("Jump") && controller.isGrounded)
+            {
+                //float jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpHeight);
+                velocity.y += jumpHeight;
+            }
+
+
+            
+#if PLATFORM_ANDROID
+            transform.Rotate(0, -Input.gyro.rotationRateUnbiased.y / 2, 0);
+#endif
+
+            controller.Move(velocity * Time.deltaTime);
         }
 
         void AutoRepeatingMessage()
@@ -162,7 +195,5 @@ namespace ClassroomSimulator
                 InvokeRepeating(nameof(AutoRepeatingMessage), 1, 0.75f);
             }
         }
-
-    
     }
 }
