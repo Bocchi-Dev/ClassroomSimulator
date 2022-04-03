@@ -10,6 +10,7 @@ TagManager:
   - MainMenuButton
   - Chair
   - Chair2
+  - PickUp
   layers:
   - Default
   - TransparentFX
