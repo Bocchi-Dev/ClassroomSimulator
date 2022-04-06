@@ -60,8 +60,7 @@ namespace ClassroomSimulator
 
             string name = FindObjectOfType<MenuClientButton>().playerName;
             Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-
-            
+ 
             CmdSetupPlayer(name, color);
 
             SetupAutoTraffic();
@@ -121,6 +120,7 @@ namespace ClassroomSimulator
             }
         }
 
+       
         void PlayerMovement()
         {
             float horizontalInput = Input.GetAxis("Horizontal");

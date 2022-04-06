@@ -45,6 +45,11 @@ namespace ClassroomSimulator
             playersArray = GameObject.FindGameObjectsWithTag("Player");
             canvasPlayerCount.text = "Players: " + playersArray.Length;
         }
+
+        private void Update()
+        {
+
+        }
     }
 }
 

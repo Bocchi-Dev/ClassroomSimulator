@@ -13,9 +13,14 @@ namespace ClassroomSimulator
         // Start is called before the first frame update
         void Start()
         {
-            NetworkServer.Spawn(gameObject);
+            
         }
 
+        public override void OnStartServer()
+        {
+            NetworkServer.Spawn(gameObject);
+            base.OnStartServer();
+        }
         // Update is called once per frame
         void Update()
         {

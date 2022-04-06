@@ -55,7 +55,7 @@ public class CustomNetworkManager : NetworkManager
 
             if (args.Length >= 5 && args[4] != "0")
             {
-                //GetComponent<TelepathyTransport>().port = ushort.Parse(args[3]);
+                GetComponent<TelepathyTransport>().port = ushort.Parse(args[3]);
                 //GetComponent<KcpTransport>().Port = ushort.Parse(args[4]);
                 //((KcpTransport)Transport.activeTransport).Port = 1234;
             }

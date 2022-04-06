@@ -1964,6 +1964,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5981416813074566659, guid: 02ff6683e4149b24ba97d80ba5975926, type: 3}
+      propertyPath: onlySyncOnChange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5981416813074566660, guid: 02ff6683e4149b24ba97d80ba5975926, type: 3}
       propertyPath: m_Name
       value: Sphere

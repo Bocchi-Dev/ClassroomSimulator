@@ -41,11 +41,13 @@ namespace ClassroomSimulator
                     RaycastHit hit;
                     if (Physics.Raycast(ray, out hit))
                     {
+                        GameObject hitObj = hit.collider.gameObject;
                         Debug.Log("raycats hit");
-                        if (hit.collider.CompareTag("PickUp"))
+                        if (hitObj.CompareTag("PickUp"))
                         {
                             isCarrying = true;
-                            CmdPickUp(hit.collider.gameObject);
+                            CmdPickUp(hitObj);
+                            Debug.Log(hitObj.name);
                             Debug.Log("pickup run");
                         }
                     }
