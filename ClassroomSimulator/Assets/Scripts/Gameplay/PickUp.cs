@@ -31,7 +31,6 @@ namespace ClassroomSimulator
         {
             if (Input.GetButtonDown("Interact"))
             {
-                Debug.Log("Pressed interact;");
                 if (!isCarrying)
                 {
                     int x = Screen.width / 2;
@@ -48,7 +47,6 @@ namespace ClassroomSimulator
                             isCarrying = true;
                             CmdPickUp(hitObj);
                             Debug.Log(hitObj.name);
-                            Debug.Log("pickup run");
                         }
                     }
                 }
@@ -64,11 +62,11 @@ namespace ClassroomSimulator
         [Command]
         public void CmdPickUp(GameObject pickObject)
         {
-            Debug.Log(pickObject.name);
+            Debug.Log("pickup run");
             PickUpObject = pickObject;
             PickUpObject.GetComponent<NetworkIdentity>().RemoveClientAuthority();
             PickUpObject.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
-            PickUpObject.GetComponent<Pickupable>().Parent = Hand;
+            PickUpObject.GetComponent<Pickupable>().Parent = gameObject;
         }
 
         [Command]
