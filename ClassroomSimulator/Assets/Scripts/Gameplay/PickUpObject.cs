@@ -36,11 +36,13 @@ namespace ClassroomSimulator
             }
         }
 
+        [Command]
         void carry(GameObject o)
         {
             o.transform.position = Vector3.Lerp(o.transform.position, mainCamera.transform.position + mainCamera.transform.forward * distance, Time.deltaTime * smooth);
         }
 
+        [Command]
         void pickUp()
         {
             if (Input.GetButtonDown("Interact"))
@@ -55,7 +57,7 @@ namespace ClassroomSimulator
                     Pickupable p = hit.collider.GetComponent<Pickupable>();
                     if (p != null)
                     {
-                        //hit.collider.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+                        hit.collider.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
                         //Debug.Log("transfereredauth");
                         carrying = true;
                         carriedObject = p.gameObject;
@@ -74,6 +76,7 @@ namespace ClassroomSimulator
 
         }
 
+        [Command]
         void dropObject()
         {
             carrying = false;
@@ -90,6 +93,7 @@ namespace ClassroomSimulator
             }
         }
 
+        [Command]
         void ThrowObject()
         {
             carrying = false;

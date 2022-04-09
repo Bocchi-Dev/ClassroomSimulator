@@ -16,13 +16,18 @@ namespace ClassroomSimulator
             base.OnStartServer();
         }
 
+        public override void OnStartClient()
+        {
+            Debug.Log("Network Client Ready OBJECTS: " + NetworkClient.ready);
+        }
+
         // Update is called once per frame
         void Update()
         {
             if (Parent != null)
             {
-                transform.position = Parent.transform.position;
-                transform.rotation = Parent.transform.rotation;
+                transform.position = Parent.transform.GetChild(0).position;
+                transform.rotation = Parent.transform.GetChild(0).rotation;
             }
         }
     }
