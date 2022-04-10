@@ -20,9 +20,14 @@ namespace ClassroomSimulator
         private float autoMoveAmount = 0.0f;
         public string trafficType = "none";
 
+        Rigidbody rb;
         public float moveSpeed = 10f;
         public float gravity = -9.8f;
         public float jumpHeight = 1f;
+        [Range(1,10)]
+        public float jumpVelocity;
+        public float fallMultiplier = 2.5f;
+        public float lowJumpMultiplier = 2f;
         public CharacterController controller;
 
         [SyncVar(hook = nameof(OnNameChanged))]
@@ -76,6 +81,7 @@ namespace ClassroomSimulator
         private void Start()
         {
             controller = GetComponent<CharacterController>();
+            rb = GetComponent<Rigidbody>();
 #if PLATFORM_ANDROID
             Camera.main.GetComponent<MouseLook>().enabled = false;
             Input.gyro.enabled = true;
@@ -131,25 +137,39 @@ namespace ClassroomSimulator
             Vector3 velocity = direction * moveSpeed;
             velocity = Camera.main.transform.TransformDirection(velocity);
 
-            velocity.y += gravity;
+            Debug.Log("Player is: " + controller.isGrounded);
 
-            if (controller.isGrounded)
+            if(controller.isGrounded && velocity.y < 0)
             {
                 velocity.y = 0;
             }
+            //velocity.y += gravity;
+
+            //if (!controller.isGrounded)
+            //{
+            //    velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1)*Time.deltaTime;
+            //    controller.Move(velocity * Time.deltaTime);
+            //}
+            
 
             if (Input.GetButtonDown("Jump") && controller.isGrounded)
             {
-                //float jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpHeight);
-                velocity.y += jumpHeight;
+                //velocity.y = 0;
+                //velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1)*Time.deltaTime;
+                //float jumpVel = Mathf.Sqrt(-2 * gravity * jumpHeight);
+                //controller.Move(velocity * Time.deltaTime);
+                //velocity.y += jumpHeight * jumpVel * Time.deltaTime;
+                //controller.Move(velocity * Time.deltaTime);
+                //velocity.y += 1 * gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
+                velocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             }
 
 
-            
 #if PLATFORM_ANDROID
             transform.Rotate(0, -Input.gyro.rotationRateUnbiased.y / 2, 0);
 #endif
 
+            velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
         }
 
