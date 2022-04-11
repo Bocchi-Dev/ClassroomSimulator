@@ -21,7 +21,12 @@ ModelImporter:
   - first:
       74: -1408806075077303419
     second: Hair6|BodyAction.007
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hair
+    second: {fileID: 2100000, guid: 40fa6c31fcb4022448dbe1166ebd460c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

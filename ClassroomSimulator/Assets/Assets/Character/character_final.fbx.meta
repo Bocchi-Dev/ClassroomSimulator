@@ -1,84 +1,34 @@
 fileFormatVersion: 2
-guid: 5fe05cc7f69eb054fb673e0ce78b7d22
+guid: 9742fd38635c95b4185db07978f852f9
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
+  internalIDToNameTable: []
+  externalObjects:
   - first:
-      74: 4781951162920444690
-    second: Armature|ArmatureAction
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 731a7eee36f9447499a5c76f2c0786ef, type: 2}
   - first:
-      74: -3908598790589692577
-    second: Armature|BodyAction
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shirt
+    second: {fileID: 2100000, guid: e5caca8e958eda74c85333417f1f8e52, type: 2}
   - first:
-      74: 4562656219060671949
-    second: Armature|BodyAction.001
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoes
+    second: {fileID: 2100000, guid: f0b4013d96f18ea40828b8e55f676d0c, type: 2}
   - first:
-      74: -4771878460675178163
-    second: Armature|BodyAction.002
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shorts
+    second: {fileID: 2100000, guid: f1e685c052981d043885467f70f48c76, type: 2}
   - first:
-      74: 3044245037133905293
-    second: Armature|BodyAction.003
-  - first:
-      74: 7666636676511667105
-    second: Armature|BodyAction.004
-  - first:
-      74: 8526070583053296810
-    second: Armature|BodyAction.005
-  - first:
-      74: -2644124221735899724
-    second: Armature|BodyAction.006
-  - first:
-      74: 5882461412168319035
-    second: Armature|BodyAction.007
-  - first:
-      74: -6444847237754026488
-    second: Hair1|BodyAction
-  - first:
-      74: 2258351707568757111
-    second: Hair1|BodyAction.001
-  - first:
-      74: 924305444357237884
-    second: Hair1|BodyAction.002
-  - first:
-      74: -90681234168591875
-    second: Hair1|BodyAction.003
-  - first:
-      74: -3126721313293978207
-    second: Hair1|BodyAction.004
-  - first:
-      74: -1711563011429342175
-    second: Hair1|BodyAction.005
-  - first:
-      74: -4491885092495615255
-    second: Hair1|BodyAction.006
-  - first:
-      74: 8979960755498806372
-    second: Hair1|BodyAction.007
-  - first:
-      74: 3554304725794020839
-    second: Hair2|BodyAction
-  - first:
-      74: -1366964605877186013
-    second: Hair2|BodyAction.001
-  - first:
-      74: 2873394671535783752
-    second: Hair2|BodyAction.002
-  - first:
-      74: 634947187925741381
-    second: Hair2|BodyAction.003
-  - first:
-      74: 2171468100531205812
-    second: Hair2|BodyAction.004
-  - first:
-      74: -9186391951006665694
-    second: Hair2|BodyAction.005
-  - first:
-      74: 6724367822898574270
-    second: Hair2|BodyAction.006
-  - first:
-      74: 6508720958834992348
-    second: Hair2|BodyAction.007
-  externalObjects: {}
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: 91c872f0601c0324db87fd64ff37fc6a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
