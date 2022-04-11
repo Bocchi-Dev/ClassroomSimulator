@@ -157,6 +157,11 @@ public class CharacterCustomization : MonoBehaviour
         SetItem("shoesColor");
     }
 
+    public Color skinHex;
+    public Color shirtHex;
+    public Color shortsHex;
+    public Color shoesHex;
+
     private void SetItem(string type)
     {
         switch (type)
@@ -167,6 +172,7 @@ public class CharacterCustomization : MonoBehaviour
                 if (ColorUtility.TryParseHtmlString(skinColors.Values.ElementAt(SkinColorID), out Color skinColor))
                 {
                     rend.materials[1].SetColor("_Color", skinColor);
+                    skinHex = skinColor;
                 }
                 break;
 
@@ -176,6 +182,7 @@ public class CharacterCustomization : MonoBehaviour
                 if (ColorUtility.TryParseHtmlString(colors.Values.ElementAt(ShirtColorID), out Color shirtColor))
                 {
                     rend.materials[0].SetColor("_Color", shirtColor);
+                    shirtHex = shirtColor;
                 }
                 break;
 
@@ -185,6 +192,7 @@ public class CharacterCustomization : MonoBehaviour
                 if (ColorUtility.TryParseHtmlString(colors.Values.ElementAt(ShortsColorID), out Color shortsColor))
                 {
                     rend.materials[3].SetColor("_Color", shortsColor);
+                    shortsHex = shortsColor;
                 }
                 break;
 
@@ -194,6 +202,7 @@ public class CharacterCustomization : MonoBehaviour
                 if (ColorUtility.TryParseHtmlString(colors.Values.ElementAt(ShoesColorID), out Color shoesColor))
                 {
                     rend.materials[2].SetColor("_Color", shoesColor);
+                    shoesHex = shoesColor;
                 }
                 break;
         }
