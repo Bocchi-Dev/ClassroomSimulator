@@ -38,7 +38,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3975576741143842789}
-  - {fileID: 9169612695017337345}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -160,9 +159,10 @@ MonoBehaviour:
   floatingInfo: {fileID: 7816150434414208728}
   trafficType: none
   moveSpeed: 10
-  gravity: -9.8
-  jumpHeight: 100
+  jumpVelocity: 2.68
   controller: {fileID: 4665223277009370005}
+  gravity: 10
+  jumpSpeed: 5
   playerName: 
   playerColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1611931353296949649
@@ -254,6 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9169612695017337345}
   - component: {fileID: 4994993637470405385}
+  - component: {fileID: 7143661722844853855}
   m_Layer: 0
   m_Name: FloorCheck
   m_TagString: Untagged
@@ -288,6 +289,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7143661722844853855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989311876635983687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86396604a88d2c341a1ced6571326875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5435136053963036584
 GameObject:
   m_ObjectHideFlags: 0

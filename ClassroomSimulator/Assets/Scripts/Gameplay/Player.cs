@@ -20,10 +20,17 @@ namespace ClassroomSimulator
         private float autoMoveAmount = 0.0f;
         public string trafficType = "none";
 
+        //movement Stuff
+        Rigidbody rb;
         public float moveSpeed = 10f;
-        public float gravity = -9.8f;
-        public float jumpHeight = 1f;
+        [Range(1,10)]
+        public float jumpVelocity;
         public CharacterController controller;
+
+        //Jumping Stuff
+        public float gravity = -9.8f;
+        public float jumpSpeed = 1f;
+        private float tempDirectionY;
 
         [SyncVar(hook = nameof(OnNameChanged))]
         public string playerName;
@@ -43,6 +50,25 @@ namespace ClassroomSimulator
             playerMaterialClone = new Material(this.GetComponent<Renderer>().material);
             playerMaterialClone.color = _New;
             this.GetComponent<Renderer>().material = playerMaterialClone;
+        }
+
+        void Awake()
+        {
+            //allow all players to run this
+            sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
+        }
+
+        private void Start()
+        {
+            controller = GetComponent<CharacterController>();
+            rb = GetComponent<Rigidbody>();
+#if PLATFORM_ANDROID
+            Camera.main.GetComponent<MouseLook>().enabled = false;
+            Input.gyro.enabled = true;
+#endif
+#if UNITY_EDITOR
+            Camera.main.GetComponent<MouseLook>().enabled = true;
+#endif
         }
 
         public override void OnStartLocalPlayer()
@@ -65,24 +91,6 @@ namespace ClassroomSimulator
             CmdSetupPlayer(name, color);
 
             SetupAutoTraffic();
-        }
-
-        void Awake()
-        {
-            //allow all players to run this
-            sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;        
-        }
-
-        private void Start()
-        {
-            controller = GetComponent<CharacterController>();
-#if PLATFORM_ANDROID
-            Camera.main.GetComponent<MouseLook>().enabled = false;
-            Input.gyro.enabled = true;
-#endif
-#if UNITY_EDITOR
-            Camera.main.GetComponent<MouseLook>().enabled = true;
-#endif
         }
 
         [Command]
@@ -128,24 +136,30 @@ namespace ClassroomSimulator
 
             //transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime);
             Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
+
+            Debug.Log("Player is grounded: " + controller.isGrounded);
+
+            
+
             Vector3 velocity = direction * moveSpeed;
             velocity = Camera.main.transform.TransformDirection(velocity);
-
-            velocity.y += gravity;
 
             if (controller.isGrounded)
             {
                 velocity.y = 0;
+
+                if (Input.GetButtonDown("Jump"))
+                {
+                    Debug.Log("Jumped!");
+                    tempDirectionY = jumpSpeed;
+                }
             }
 
-            if (Input.GetButtonDown("Jump") && controller.isGrounded)
-            {
-                //float jumpVelocity = Mathf.Sqrt(-2 * gravity * jumpHeight);
-                velocity.y += jumpHeight;
-            }
+            tempDirectionY -= gravity * Time.deltaTime;
+            velocity.y = tempDirectionY;
 
 
-            
+
 #if PLATFORM_ANDROID
             transform.Rotate(0, -Input.gyro.rotationRateUnbiased.y / 2, 0);
 #endif
@@ -195,5 +209,7 @@ namespace ClassroomSimulator
                 InvokeRepeating(nameof(AutoRepeatingMessage), 1, 0.75f);
             }
         }
+
+       
     }
 }
