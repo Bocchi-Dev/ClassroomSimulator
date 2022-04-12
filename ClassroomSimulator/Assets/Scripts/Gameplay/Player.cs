@@ -25,6 +25,46 @@ namespace ClassroomSimulator
 
         [SerializeField]
         private SkinnedMeshRenderer playerBodyRenderer;
+        public GameObject hairZero;
+        public GameObject hairOne;
+        public GameObject hairTwo;
+        public GameObject hairThree;
+
+        [SyncVar(hook = nameof(OnHairChanged))]
+        public int hairNum;
+        void OnHairChanged(int _Old, int _New)
+        {
+            switch (hairNum)
+            {
+                case 1:
+                    {
+                        hairZero.SetActive(true);
+                    }
+                    break;
+                case 2:
+                    {
+                        hairOne.SetActive(true);
+                    }
+                   break;
+                case 3:
+                    {
+                        hairTwo.SetActive(true);
+                    }
+                    break;
+                case 4:
+                    {
+                        hairThree.SetActive(true);
+                    }
+                    break;
+                case 5:
+                    {
+                        GetComponent<DisableAllGameObjectsOfParent>().DisableAllChildren();
+                    }
+                    break;
+
+
+            }
+        }
 
         [SyncVar(hook = nameof(OnNameChanged))]
         public string playerName;
@@ -75,6 +115,7 @@ namespace ClassroomSimulator
         public override void OnStartLocalPlayer()
         {
             sceneScript.playerScript = this;
+            GetComponent<DisableAllGameObjectsOfParent>().DisableAllChildren();
 
             Camera.main.transform.SetParent(transform);
             Camera.main.transform.localPosition = new Vector3(0, 1, 0);
@@ -91,7 +132,9 @@ namespace ClassroomSimulator
             Color shorts = FindObjectOfType<PlayerValues>().shortsColor;
             Color shoes = FindObjectOfType<PlayerValues>().shoesColor;
 
-            CmdSetupPlayer(name, color, shirt, skin, shorts, shoes);
+            int hair = FindObjectOfType<PlayerValues>().hairStyleNum;
+
+            CmdSetupPlayer(name, color, shirt, skin, shorts, shoes, hair);
 
             SetupAutoTraffic();
         }
@@ -105,7 +148,6 @@ namespace ClassroomSimulator
         private void Start()
         {
             controller = GetComponent<CharacterController>();
-            GetComponent<DisableAllGameObjectsOfParent>().DisableAllChildren();
         }
 
         [Command]
@@ -115,7 +157,7 @@ namespace ClassroomSimulator
         }
 
         [Command]
-        public void CmdSetupPlayer(string _name, Color _col, Color _shirt, Color _skin, Color _shorts, Color _shoes)
+        public void CmdSetupPlayer(string _name, Color _col, Color _shirt, Color _skin, Color _shorts, Color _shoes, int _hair)
         {
             //player info sent to server, then server updates sync vars which handles it on all clients
             playerNameText.text = _name;
@@ -125,6 +167,7 @@ namespace ClassroomSimulator
             playerSkinColor = _skin;
             playerShortsColor = _shorts;
             playerShoesColor = _shoes;
+            hairNum = _hair;
         }
 
         void Update()

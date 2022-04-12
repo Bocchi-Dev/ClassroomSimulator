@@ -482,9 +482,17 @@ MonoBehaviour:
   moveSpeed: 10
   controller: {fileID: 4665223277009370005}
   playerBodyRenderer: {fileID: 7845629476480454868}
+  hairZero: {fileID: 2061385716285586916}
+  hairOne: {fileID: 8031010576608306979}
+  hairTwo: {fileID: 1488543378516556866}
+  hairThree: {fileID: 2152576385071591675}
+  hairNum: 0
   playerName: 
   playerColor: {r: 1, g: 1, b: 1, a: 1}
-  playerShirtColor: {r: 1, g: 1, b: 1, a: 1}
+  playerShirtColors: {r: 0, g: 0, b: 0, a: 0}
+  playerSkinColor: {r: 0, g: 0, b: 0, a: 0}
+  playerShoesColor: {r: 0, g: 0, b: 0, a: 0}
+  playerShortsColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1611931353296949649
 MonoBehaviour:
   m_ObjectHideFlags: 0
