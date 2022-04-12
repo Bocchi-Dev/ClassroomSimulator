@@ -159,12 +159,10 @@ MonoBehaviour:
   floatingInfo: {fileID: 7816150434414208728}
   trafficType: none
   moveSpeed: 10
-  gravity: -100000
-  jumpHeight: 200
   jumpVelocity: 2.68
-  fallMultiplier: 100
-  lowJumpMultiplier: 200
   controller: {fileID: 4665223277009370005}
+  gravity: 10
+  jumpSpeed: 5
   playerName: 
   playerColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1611931353296949649
