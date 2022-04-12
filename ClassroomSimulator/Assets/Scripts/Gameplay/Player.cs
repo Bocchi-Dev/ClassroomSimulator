@@ -23,6 +23,9 @@ namespace ClassroomSimulator
         public float moveSpeed = 10f;
         public CharacterController controller;
 
+        [SerializeField]
+        private Renderer playerBodyRenderer;
+
         [SyncVar(hook = nameof(OnNameChanged))]
         public string playerName;
         void OnNameChanged(string _Old, string _New)
@@ -41,8 +44,14 @@ namespace ClassroomSimulator
             this.GetComponent<Renderer>().material = playerMaterialClone;
         }
 
-        [SerializeField]
-        private Renderer rend;
+        [SyncVar(hook = nameof(OnShirtColorChanged))]
+        public Color playerShirtColor = Color.white;
+        void OnShirtColorChanged(Color _Old, Color _New)
+        {
+            //playerMaterialClone = new Material(playerBodyRenderer.GetComponent<Renderer>().material);
+            playerMaterialClone.color = _New;
+            playerBodyRenderer.materials[0] = playerMaterialClone;
+        }
 
         public override void OnStartLocalPlayer()
         {
@@ -58,8 +67,9 @@ namespace ClassroomSimulator
             string name = FindObjectOfType<MenuClientButton>().playerName;
             Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 
+            Color skin = FindObjectOfType<PlayerValues>().skinColor;
             
-            CmdSetupPlayer(name, color);
+            CmdSetupPlayer(name, color, skin);
 
             SetupAutoTraffic();
         }
@@ -85,12 +95,13 @@ namespace ClassroomSimulator
         }
 
         [Command]
-        public void CmdSetupPlayer(string _name, Color _col)
+        public void CmdSetupPlayer(string _name, Color _col, Color _shirt)
         {
             //player info sent to server, then server updates sync vars which handles it on all clients
             playerNameText.text = _name;
             playerName = _name;
             playerColor = _col;
+            playerShirtColor = _shirt;
         }
 
         void Update()

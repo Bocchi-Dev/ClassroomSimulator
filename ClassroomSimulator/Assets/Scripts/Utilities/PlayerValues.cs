@@ -11,5 +11,18 @@ public class PlayerValues : MonoBehaviour
     public Color shortsColor;
     public Color shoesColor;
 
-    public int hiarStyleNum;
+    public int hairStyleNum;
+
+    public void setValues()
+    {
+        skinColor = FindObjectOfType<CharacterCustomization>().skinHex;
+        shirtColor = FindObjectOfType<CharacterCustomization>().shirtHex;
+        shortsColor = FindObjectOfType<CharacterCustomization>().shortsHex;
+        shoesColor = FindObjectOfType<CharacterCustomization>().shoesHex;
+    }
+
+    public void setHairValue(int num)
+    {
+        hairStyleNum = num;
+    }
 }
