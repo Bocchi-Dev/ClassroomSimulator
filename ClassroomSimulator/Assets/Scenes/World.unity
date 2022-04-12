@@ -50432,6 +50432,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 14862_3_basin_fountain_v2
       objectReference: {fileID: 0}
+    - target: {fileID: 4886557597134746969, guid: 43f69374660f04075b9b05d09aca949a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99a67ba82fade4db6948bc29e80c54df, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43f69374660f04075b9b05d09aca949a, type: 3}
 --- !u!4 &1611323204 stripped
