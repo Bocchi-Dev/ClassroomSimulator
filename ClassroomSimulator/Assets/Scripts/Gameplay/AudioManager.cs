@@ -1,0 +1,48 @@
+using UnityEngine.Audio;
+using System;
+using UnityEngine;
+
+
+public class AudioManager : MonoBehaviour
+{
+
+    public Sounds[] sound;
+    int rand = UnityEngine.Random.Range(10, 20);
+    // Start is called before the first frame update
+    void Awake()
+    {
+        foreach (Sounds s in sound)
+        {
+           s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+            s.source.time = s.time;
+            s.source.spatialBlend = s.SpatialSound;
+        }
+    }
+
+    void Start()
+    {
+        Play("bgmusic1");
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void Play(string name)
+    {
+        Sounds s = Array.Find(sound, sound => sound.name == name);
+        
+        s.source.Play();
+    }
+    public void Stop(string name)
+    {
+        Sounds s = Array.Find(sound, sound => sound.name == name);
+        s.source.Stop();
+    }
+
+}
