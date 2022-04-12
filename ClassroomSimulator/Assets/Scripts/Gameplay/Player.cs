@@ -25,8 +25,6 @@ namespace ClassroomSimulator
 
         [SyncVar(hook = nameof(OnNameChanged))]
         public string playerName;
-
-     
         void OnNameChanged(string _Old, string _New)
         {
             playerNameText.text = playerName;
@@ -42,6 +40,9 @@ namespace ClassroomSimulator
             playerMaterialClone.color = _New;
             this.GetComponent<Renderer>().material = playerMaterialClone;
         }
+
+        [SerializeField]
+        private Renderer rend;
 
         public override void OnStartLocalPlayer()
         {
@@ -74,6 +75,7 @@ namespace ClassroomSimulator
         private void Start()
         {
             controller = GetComponent<CharacterController>();
+            GetComponent<DisableAllGameObjectsOfParent>().DisableAllChildren();
         }
 
         [Command]

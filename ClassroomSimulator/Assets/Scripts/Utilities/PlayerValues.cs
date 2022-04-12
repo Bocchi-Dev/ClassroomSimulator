@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerValues : MonoBehaviour
 {
     public string playerName;
-    //add other values later
 
-    public void initPlayerValues(string name)
-    {
-        playerName = name;
-    }
+    public Color skinColor;
+    public Color shirtColor;
+    public Color shortsColor;
+    public Color shoesColor;
+
+    public int hiarStyleNum;
 }
