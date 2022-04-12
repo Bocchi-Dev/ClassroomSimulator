@@ -484,7 +484,7 @@ MonoBehaviour:
   playerBodyRenderer: {fileID: 7845629476480454868}
   playerName: 
   playerColor: {r: 1, g: 1, b: 1, a: 1}
-  playerSkinColor: {r: 1, g: 1, b: 1, a: 1}
+  playerShirtColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1611931353296949649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,7 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5eaac490c23334dbb1198d6ec7fc17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentGameObject: {fileID: 0}
+  parentGameObject: {fileID: 4273736879963449934}
 --- !u!1 &5435136053963036584
 GameObject:
   m_ObjectHideFlags: 0

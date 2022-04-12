@@ -24,7 +24,7 @@ namespace ClassroomSimulator
         public CharacterController controller;
 
         [SerializeField]
-        private Renderer playerBodyRenderer;
+        private SkinnedMeshRenderer playerBodyRenderer;
 
         [SyncVar(hook = nameof(OnNameChanged))]
         public string playerName;
@@ -44,13 +44,32 @@ namespace ClassroomSimulator
             this.GetComponent<Renderer>().material = playerMaterialClone;
         }
 
-        [SyncVar(hook = nameof(OnShirtColorChanged))]
-        public Color playerShirtColor = Color.white;
-        void OnShirtColorChanged(Color _Old, Color _New)
+        [SyncVar(hook = nameof(OnPlayerShirtColorChanged))]
+        public Color playerShirtColors;
+        void OnPlayerShirtColorChanged(Color _Old, Color _New)
         {
-            //playerMaterialClone = new Material(playerBodyRenderer.GetComponent<Renderer>().material);
-            playerMaterialClone.color = _New;
-            playerBodyRenderer.materials[0] = playerMaterialClone;
+            playerBodyRenderer.materials[0].color = _New;
+        }
+
+        [SyncVar(hook = nameof(OnPlayerSkinColorChanged))]
+        public Color playerSkinColor;
+        void OnPlayerSkinColorChanged(Color _Old, Color _New)
+        {
+            playerBodyRenderer.materials[1].color = _New;
+        }
+
+        [SyncVar(hook = nameof(OnPlayerShoesColorChanged))]
+        public Color playerShoesColor;
+        void OnPlayerShoesColorChanged(Color _Old, Color _New)
+        {
+            playerBodyRenderer.materials[2].color = _New;
+        }
+
+        [SyncVar(hook = nameof(OnPlayerShortsColorChanged))]
+        public Color playerShortsColor;
+        void OnPlayerShortsColorChanged(Color _Old, Color _New)
+        {
+            playerBodyRenderer.materials[3].color = _New;
         }
 
         public override void OnStartLocalPlayer()
@@ -67,9 +86,12 @@ namespace ClassroomSimulator
             string name = FindObjectOfType<MenuClientButton>().playerName;
             Color color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
 
+            Color shirt = FindObjectOfType<PlayerValues>().shirtColor;
             Color skin = FindObjectOfType<PlayerValues>().skinColor;
-            
-            CmdSetupPlayer(name, color, skin);
+            Color shorts = FindObjectOfType<PlayerValues>().shortsColor;
+            Color shoes = FindObjectOfType<PlayerValues>().shoesColor;
+
+            CmdSetupPlayer(name, color, shirt, skin, shorts, shoes);
 
             SetupAutoTraffic();
         }
@@ -77,9 +99,7 @@ namespace ClassroomSimulator
         void Awake()
         {
             //allow all players to run this
-            sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;
-
-           
+            sceneScript = GameObject.Find("SceneReference").GetComponent<SceneReference>().sceneScript;          
         }
 
         private void Start()
@@ -95,13 +115,16 @@ namespace ClassroomSimulator
         }
 
         [Command]
-        public void CmdSetupPlayer(string _name, Color _col, Color _shirt)
+        public void CmdSetupPlayer(string _name, Color _col, Color _shirt, Color _skin, Color _shorts, Color _shoes)
         {
             //player info sent to server, then server updates sync vars which handles it on all clients
             playerNameText.text = _name;
             playerName = _name;
             playerColor = _col;
-            playerShirtColor = _shirt;
+            playerShirtColors = _shirt;
+            playerSkinColor = _skin;
+            playerShortsColor = _shorts;
+            playerShoesColor = _shoes;
         }
 
         void Update()
