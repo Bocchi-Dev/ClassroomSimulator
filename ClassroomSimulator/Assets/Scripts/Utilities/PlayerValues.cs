@@ -5,10 +5,24 @@ using UnityEngine;
 public class PlayerValues : MonoBehaviour
 {
     public string playerName;
-    //add other values later
 
-    public void initPlayerValues(string name)
+    public Color skinColor;
+    public Color shirtColor;
+    public Color shortsColor;
+    public Color shoesColor;
+
+    public int hairStyleNum;
+
+    public void setValues()
     {
-        playerName = name;
+        skinColor = FindObjectOfType<CharacterCustomization>().skinHex;
+        shirtColor = FindObjectOfType<CharacterCustomization>().shirtHex;
+        shortsColor = FindObjectOfType<CharacterCustomization>().shortsHex;
+        shoesColor = FindObjectOfType<CharacterCustomization>().shoesHex;
+    }
+
+    public void setHairValue(int num)
+    {
+        hairStyleNum = num;
     }
 }
