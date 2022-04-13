@@ -147,7 +147,7 @@ namespace ClassroomSimulator
             GetComponent<DisableAllGameObjectsOfParent>().DisableAllChildren();
 
             Camera.main.transform.SetParent(transform);
-            Camera.main.transform.localPosition = new Vector3(0, 0.60f, 0);
+            Camera.main.transform.localPosition = new Vector3(0, 0.60f, 0.5f);
             #if UNITY_EDITOR
                 Camera.main.GetComponent<MouseLook>().playerBody = transform;
             #endif
@@ -221,7 +221,7 @@ namespace ClassroomSimulator
 
             Debug.Log("Player is grounded: " + controller.isGrounded);
 
-            
+
 
             Vector3 velocity = direction * moveSpeed;
             velocity = Camera.main.transform.TransformDirection(velocity);
