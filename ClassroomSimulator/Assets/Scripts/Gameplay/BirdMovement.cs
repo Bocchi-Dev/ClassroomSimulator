@@ -15,12 +15,13 @@ public class BirdMovement : MonoBehaviour
     public float VerticalSpeed = 1f;
     public float otherSpeed = 0.02f;
     public float Amplitude = 2f;
+    public float timer = 20;
     
 
     float newZSpeed;
     float newHSpeed;
     float newAmp;
-
+    public float newTimer;
 
     Vector3 tempPosition;
 
@@ -31,7 +32,7 @@ public class BirdMovement : MonoBehaviour
         // endPos2 = endPos.transform.position;
       
         tempPosition = transform.position;
-        InvokeRepeating("NewVal", 0.01f, 20);
+        InvokeRepeating("NewVal", 0.01f, timer);
 
     }
 
@@ -58,9 +59,11 @@ public class BirdMovement : MonoBehaviour
         newZSpeed = Random.Range(-0.07f, 0.07f);
         newHSpeed = Random.Range(-0.07f, 0.07f);
         newAmp = Random.Range(1f, 2f);
+        newTimer = Random.Range(15, 20);
         HorizontalSpeed = newHSpeed;
         otherSpeed = newZSpeed;
         Amplitude = newAmp;
+        timer = newTimer;
     }
 
   
