@@ -27,6 +27,9 @@ namespace ClassroomSimulator
         public float jumpVelocity;
         public CharacterController controller;
 
+        //Animation stuff
+        public Animator anime;
+
         //Jumping Stuff
         public float gravity = -9.8f;
         public float jumpSpeed = 1f;
@@ -131,6 +134,7 @@ namespace ClassroomSimulator
         {
             controller = GetComponent<CharacterController>();
             rb = GetComponent<Rigidbody>();
+            
 #if PLATFORM_ANDROID
             Camera.main.GetComponent<MouseLook>().enabled = false;
             Input.gyro.enabled = true;
@@ -216,12 +220,21 @@ namespace ClassroomSimulator
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
 
+            if(horizontalInput != 0 || verticalInput != 0)
+            {
+                anime.SetBool("isWalking", true);
+                Debug.Log("horizontal input: " + horizontalInput);
+                Debug.Log("Vertical input: " + verticalInput);
+            }
+            else 
+            {
+                anime.SetBool("isWalking", false);
+            }
+
             //transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime);
             Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
 
             Debug.Log("Player is grounded: " + controller.isGrounded);
-
-
 
             Vector3 velocity = direction * moveSpeed;
             velocity = Camera.main.transform.TransformDirection(velocity);
@@ -240,13 +253,12 @@ namespace ClassroomSimulator
             tempDirectionY -= gravity * Time.deltaTime;
             velocity.y = tempDirectionY;
 
-
-
 #if PLATFORM_ANDROID
             transform.Rotate(0, -Input.gyro.rotationRateUnbiased.y / 2, 0);
 #endif
 
             controller.Move(velocity * Time.deltaTime);
+            
         }
 
         void AutoRepeatingMessage()

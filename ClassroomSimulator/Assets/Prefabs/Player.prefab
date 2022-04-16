@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 4624080553491799521}
   - component: {fileID: 4739337760876373561}
   - component: {fileID: 5106804657401896200}
+  - component: {fileID: 2873058515934067885}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -467,6 +468,7 @@ MonoBehaviour:
   moveSpeed: 10
   jumpVelocity: 0
   controller: {fileID: 4665223277009370005}
+  anime: {fileID: 1091013670386099339}
   gravity: 10
   jumpSpeed: 7
   playerBodyRenderer: {fileID: 3397354549729987945}
@@ -573,6 +575,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentGameObject: {fileID: 8531138868518299616}
+--- !u!114 &2873058515934067885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665223277009370008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  animator: {fileID: 1091013670386099339}
 --- !u!1 &5435136053963036584
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,6 +889,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c30dbfc209957c4a9e8538fea7e87c3, type: 3}
+--- !u!4 &7901066724274371595 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3160868574398501840, guid: 1c30dbfc209957c4a9e8538fea7e87c3, type: 3}
+  m_PrefabInstance: {fileID: 4144556947082858555}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4471746676075083728 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1c30dbfc209957c4a9e8538fea7e87c3, type: 3}
+  m_PrefabInstance: {fileID: 4144556947082858555}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3838480048131501418 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1c30dbfc209957c4a9e8538fea7e87c3, type: 3}
@@ -879,15 +907,5 @@ GameObject:
 --- !u!137 &3397354549729987945 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1630794972795428178, guid: 1c30dbfc209957c4a9e8538fea7e87c3, type: 3}
-  m_PrefabInstance: {fileID: 4144556947082858555}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4471746676075083728 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1c30dbfc209957c4a9e8538fea7e87c3, type: 3}
-  m_PrefabInstance: {fileID: 4144556947082858555}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7901066724274371595 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -3160868574398501840, guid: 1c30dbfc209957c4a9e8538fea7e87c3, type: 3}
   m_PrefabInstance: {fileID: 4144556947082858555}
   m_PrefabAsset: {fileID: 0}
