@@ -142,6 +142,9 @@ namespace ClassroomSimulator
 #if UNITY_EDITOR
             Camera.main.GetComponent<MouseLook>().enabled = true;
 #endif
+#if UNITY_STANDALONE
+            Camera.main.GetComponent<MouseLook>().enabled = true;
+#endif
         }
         
 
@@ -152,9 +155,12 @@ namespace ClassroomSimulator
 
             Camera.main.transform.SetParent(transform);
             Camera.main.transform.localPosition = new Vector3(0, 0.60f, 0.5f);
-            #if UNITY_EDITOR
-                Camera.main.GetComponent<MouseLook>().playerBody = transform;
-            #endif
+#if UNITY_EDITOR
+            Camera.main.GetComponent<MouseLook>().playerBody = transform;
+#endif
+#if UNITY_STANDALONE
+            Camera.main.GetComponent<MouseLook>().playerBody = transform;
+#endif
 
             floatingInfo.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
             floatingInfo.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
