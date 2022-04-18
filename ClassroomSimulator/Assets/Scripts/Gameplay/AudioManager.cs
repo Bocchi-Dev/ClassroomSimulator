@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour
 {
 
     public Sounds[] sound;
-    int rand = UnityEngine.Random.Range(10, 20);
+  
     // Start is called before the first frame update
     void Awake()
     {
