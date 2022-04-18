@@ -27,6 +27,9 @@ namespace ClassroomSimulator
         public float jumpVelocity;
         public CharacterController controller;
 
+        //Animation stuff
+        public Animator anime;
+
         //Jumping Stuff
         public float gravity = -9.8f;
         public float jumpSpeed = 1f;
@@ -131,11 +134,15 @@ namespace ClassroomSimulator
         {
             controller = GetComponent<CharacterController>();
             rb = GetComponent<Rigidbody>();
+            
 #if PLATFORM_ANDROID
             Camera.main.GetComponent<MouseLook>().enabled = false;
             Input.gyro.enabled = true;
 #endif
 #if UNITY_EDITOR
+            Camera.main.GetComponent<MouseLook>().enabled = true;
+#endif
+#if UNITY_STANDALONE
             Camera.main.GetComponent<MouseLook>().enabled = true;
 #endif
         }
@@ -148,9 +155,12 @@ namespace ClassroomSimulator
 
             Camera.main.transform.SetParent(transform);
             Camera.main.transform.localPosition = new Vector3(0, 0.60f, 0.5f);
-            #if UNITY_EDITOR
-                Camera.main.GetComponent<MouseLook>().playerBody = transform;
-            #endif
+#if UNITY_EDITOR
+            Camera.main.GetComponent<MouseLook>().playerBody = transform;
+#endif
+#if UNITY_STANDALONE
+            Camera.main.GetComponent<MouseLook>().playerBody = transform;
+#endif
 
             floatingInfo.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
             floatingInfo.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
@@ -216,12 +226,58 @@ namespace ClassroomSimulator
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
 
+            if(horizontalInput != 0 || verticalInput != 0)
+            {
+                anime.SetBool("isWalking", true);
+
+                anime.SetBool("raiseHand", false);
+                anime.SetBool("wave", false);
+                anime.SetBool("clap", false);
+                anime.SetBool("dance", false);
+            }
+            else 
+            {
+                anime.SetBool("isWalking", false);
+            }
+
+            //Emotes
+            if(Input.GetButtonDown("Emote 1"))
+            {
+                anime.SetBool("raiseHand", true);
+
+                anime.SetBool("wave", false);
+                anime.SetBool("clap", false);
+                anime.SetBool("dance", false);
+            }
+            if (Input.GetButtonDown("Emote 2"))
+            {
+                anime.SetBool("wave", true);
+
+                anime.SetBool("raiseHand", false);
+                anime.SetBool("clap", false);
+                anime.SetBool("dance", false);
+            }
+            if (Input.GetButtonDown("Emote 3"))
+            {
+                anime.SetBool("clap", true);
+
+                anime.SetBool("raiseHand", false);
+                anime.SetBool("wave", false);
+                anime.SetBool("dance", false);
+            }
+            if (Input.GetButtonDown("Emote 4"))
+            {
+                anime.SetBool("dance", true);
+
+                anime.SetBool("raiseHand", false);
+                anime.SetBool("wave", false);
+                anime.SetBool("clap", false);
+            }
+
             //transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime);
             Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
 
             Debug.Log("Player is grounded: " + controller.isGrounded);
-
-
 
             Vector3 velocity = direction * moveSpeed;
             velocity = Camera.main.transform.TransformDirection(velocity);
@@ -240,13 +296,12 @@ namespace ClassroomSimulator
             tempDirectionY -= gravity * Time.deltaTime;
             velocity.y = tempDirectionY;
 
-
-
 #if PLATFORM_ANDROID
             transform.Rotate(0, -Input.gyro.rotationRateUnbiased.y / 2, 0);
 #endif
 
             controller.Move(velocity * Time.deltaTime);
+            
         }
 
         void AutoRepeatingMessage()
