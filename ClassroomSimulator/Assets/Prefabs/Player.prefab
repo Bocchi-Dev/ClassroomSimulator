@@ -468,10 +468,10 @@ MonoBehaviour:
   moveSpeed: 10
   jumpVelocity: 0
   controller: {fileID: 4665223277009370005}
-  anime: {fileID: 0}
+  anime: {fileID: 7510405522607842131}
   gravity: 10
   jumpSpeed: 7
-  playerBodyRenderer: {fileID: 0}
+  playerBodyRenderer: {fileID: 3921642577336189397}
   hairZero: {fileID: 6281281746214159829}
   hairOne: {fileID: 1564926419815836068}
   hairTwo: {fileID: 2260493726341881695}
@@ -922,5 +922,10 @@ Transform:
 --- !u!1 &3174104903632036310 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d0eb36324b145b45ac4fc833daaf75c, type: 3}
+  m_PrefabInstance: {fileID: 2363763384880274567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &3921642577336189397 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1630794972795428178, guid: 9d0eb36324b145b45ac4fc833daaf75c, type: 3}
   m_PrefabInstance: {fileID: 2363763384880274567}
   m_PrefabAsset: {fileID: 0}

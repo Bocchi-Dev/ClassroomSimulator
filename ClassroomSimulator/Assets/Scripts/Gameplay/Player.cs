@@ -229,12 +229,49 @@ namespace ClassroomSimulator
             if(horizontalInput != 0 || verticalInput != 0)
             {
                 anime.SetBool("isWalking", true);
-                Debug.Log("horizontal input: " + horizontalInput);
-                Debug.Log("Vertical input: " + verticalInput);
+
+                anime.SetBool("raiseHand", false);
+                anime.SetBool("wave", false);
+                anime.SetBool("clap", false);
+                anime.SetBool("dance", false);
             }
             else 
             {
                 anime.SetBool("isWalking", false);
+            }
+
+            //Emotes
+            if(Input.GetButtonDown("Emote 1"))
+            {
+                anime.SetBool("raiseHand", true);
+
+                anime.SetBool("wave", false);
+                anime.SetBool("clap", false);
+                anime.SetBool("dance", false);
+            }
+            if (Input.GetButtonDown("Emote 2"))
+            {
+                anime.SetBool("wave", true);
+
+                anime.SetBool("raiseHand", false);
+                anime.SetBool("clap", false);
+                anime.SetBool("dance", false);
+            }
+            if (Input.GetButtonDown("Emote 3"))
+            {
+                anime.SetBool("clap", true);
+
+                anime.SetBool("raiseHand", false);
+                anime.SetBool("wave", false);
+                anime.SetBool("dance", false);
+            }
+            if (Input.GetButtonDown("Emote 4"))
+            {
+                anime.SetBool("dance", true);
+
+                anime.SetBool("raiseHand", false);
+                anime.SetBool("wave", false);
+                anime.SetBool("clap", false);
             }
 
             //transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime);
