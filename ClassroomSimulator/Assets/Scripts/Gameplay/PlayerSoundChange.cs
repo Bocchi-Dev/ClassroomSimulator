@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerSoundChange : MonoBehaviour
 {
+    public float stepRate = 0.5f;
+    public float stepCoolDown;
+    public AudioClip footStep;
+
+    public CharacterController cc;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,25 +18,13 @@ public class PlayerSoundChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "ChangeSong")
+        stepCoolDown -= Time.deltaTime;
+        if (cc.velocity.magnitude > 2f && stepCoolDown < 0f && cc.isGrounded == true)
         {
-            FindObjectOfType<AudioManager>().Stop("bgmusic1");
-            FindObjectOfType<AudioManager>().Play("bgmusic2");
-            Debug.Log("Music Off");
+            GetComponent<AudioSource>().pitch = 1f + Random.Range(-0.2f, 0.2f);
+            GetComponent<AudioSource>().PlayOneShot(footStep);
+            stepCoolDown = stepRate;
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.name == "ChangeSong")
-        {
-            FindObjectOfType<AudioManager>().Play("bgmusic1");
-            FindObjectOfType<AudioManager>().Stop("bgmusic2");
-            Debug.Log("Music On");
-        }
-    }
 }

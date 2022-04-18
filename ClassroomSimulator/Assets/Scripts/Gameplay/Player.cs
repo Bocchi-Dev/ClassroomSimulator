@@ -134,6 +134,9 @@ namespace ClassroomSimulator
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
 
+          
+           
+
             //transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime);
             Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
 
@@ -155,16 +158,7 @@ namespace ClassroomSimulator
                 }
             }
 
-            if (horizontalInput != 0 || verticalInput != 0)
-            {
-                FindObjectOfType<AudioManager>().Play("Walking");
-                Debug.Log("I am Walking");
-            }
-            else
-            {
-                FindObjectOfType<AudioManager>().Stop("Walking");
-                Debug.Log("I am not Walking");
-            }
+          
             tempDirectionY -= gravity * Time.deltaTime;
             velocity.y = tempDirectionY;
 

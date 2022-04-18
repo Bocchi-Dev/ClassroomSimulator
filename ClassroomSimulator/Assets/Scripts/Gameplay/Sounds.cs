@@ -18,6 +18,7 @@ public class Sounds
     public float time;
 
     public bool loop;
+    public bool PlayOnAwake;
 
     [HideInInspector]
     public AudioSource source;

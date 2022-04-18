@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
             s.source.time = s.time;
+            s.source.playOnAwake = s.PlayOnAwake;
             s.source.spatialBlend = s.SpatialSound;
         }
     }
@@ -26,6 +27,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         Play("bgmusic1");
+        InvokeRepeating("playBell", 5, 1800);
     }
     // Update is called once per frame
     void Update()
@@ -43,6 +45,11 @@ public class AudioManager : MonoBehaviour
     {
         Sounds s = Array.Find(sound, sound => sound.name == name);
         s.source.Stop();
+    }
+
+    void playBell()
+    {
+        Play("SchoolBell");
     }
 
 }
