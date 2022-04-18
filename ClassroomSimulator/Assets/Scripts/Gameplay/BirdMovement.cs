@@ -16,7 +16,7 @@ public class BirdMovement : MonoBehaviour
     public float otherSpeed = 0.02f;
     public float Amplitude = 2f;
     public float timer = 20;
-    public float rotationAngle;
+    
 
     float newZSpeed;
     float newHSpeed;
@@ -54,9 +54,10 @@ void FixedUpdate()
     tempPosition.y = 45f + Mathf.Sin(Time.realtimeSinceStartup * VerticalSpeed) * Amplitude;
     tempPosition.z += otherSpeed;
     transform.position = tempPosition;
-        Vector3 movement = new Vector3(tempPosition.x,0,tempPosition.z).normalized;
-    Quaternion targetRotation = Quaternion.LookRotation(movement);
-        targetRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationAngle);
+
+        Vector3 movement = new Vector3(transform.position.x, 0, transform.position.z).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(movement);
+       
 
         rb.MoveRotation(targetRotation);
         
