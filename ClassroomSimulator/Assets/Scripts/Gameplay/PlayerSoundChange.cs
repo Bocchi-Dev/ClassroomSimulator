@@ -9,7 +9,9 @@ public class PlayerSoundChange : MonoBehaviour
     public AudioClip footStepCon;
     public AudioClip footStepGrass;
     int soundchanger = 1;
-
+    
+    public ChairBehaviour behaviour;
+    
     public CharacterController cc;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +22,9 @@ public class PlayerSoundChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         stepCoolDown -= Time.deltaTime;
+       
         if (cc.velocity.magnitude > 2f && stepCoolDown < 0f && cc.isGrounded == true)
         {
             if (soundchanger == 1)
@@ -32,15 +36,14 @@ public class PlayerSoundChange : MonoBehaviour
                 walkInGrass();
             }
         }
+        if (behaviour.isSitting)
+        {
+            GetComponent<AudioSource>().Stop();
+        }
+
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Grass")) {
-            Debug.Log("i am colliding with grass");
-                }
-    }
-
+ 
 
     void OnTriggerEnter(Collider other)
     {
@@ -49,6 +52,10 @@ public class PlayerSoundChange : MonoBehaviour
             soundchanger = 0;
             Debug.Log("i am triggering grass");
         }
+        if (other.gameObject.CompareTag("Chair"))
+        {
+            behaviour = other.GetComponent<ChairBehaviour>();
+        }
     }
 
    void OnTriggerExit(Collider other)
@@ -56,6 +63,10 @@ public class PlayerSoundChange : MonoBehaviour
         if (other.gameObject.CompareTag("Grass"))
         {
             soundchanger = 1;
+        }
+        if (other.gameObject.CompareTag("Chair"))
+        {
+            behaviour = null;
         }
     }
 
