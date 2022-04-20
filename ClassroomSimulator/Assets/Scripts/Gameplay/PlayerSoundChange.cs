@@ -8,7 +8,7 @@ public class PlayerSoundChange : MonoBehaviour
     public float stepCoolDown;
     public AudioClip footStepCon;
     public AudioClip footStepGrass;
-    public int soundchanger = 1;
+    int soundchanger = 1;
 
     public CharacterController cc;
     // Start is called before the first frame update
@@ -34,12 +34,20 @@ public class PlayerSoundChange : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Grass")) {
+            Debug.Log("i am colliding with grass");
+                }
+    }
+
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Grass"))
         {
             soundchanger = 0;
+            Debug.Log("i am triggering grass");
         }
     }
 

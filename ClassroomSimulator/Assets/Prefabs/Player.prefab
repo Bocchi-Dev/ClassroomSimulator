@@ -68,7 +68,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4665223277009370008}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -290,8 +290,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 3.4701395, z: 1}
+  m_Center: {x: 0, y: -1.2350678, z: 0}
 --- !u!114 &7143661722844853855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +308,6 @@ MonoBehaviour:
   stepCoolDown: 0
   footStepCon: {fileID: 8300000, guid: 14bab19221509b046ab8ac1915ffc9f8, type: 3}
   footStepGrass: {fileID: 8300000, guid: b31877a0a8542804abc6c755f3cefa5d, type: 3}
-  soundchanger: 1
   cc: {fileID: 4665223277009370005}
 --- !u!82 &2716156275876739499
 AudioSource:
@@ -645,7 +644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e732595060a44e469c0bde44cc82ff4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.58
+      value: -1.76
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4e732595060a44e469c0bde44cc82ff4, type: 3}
       propertyPath: m_LocalPosition.z
