@@ -21,6 +21,7 @@ public class BirdMovement : MonoBehaviour
     float newZSpeed;
     float newHSpeed;
     float newAmp;
+  
 
     public float newTimer;
 
@@ -35,19 +36,19 @@ public class BirdMovement : MonoBehaviour
       
         InvokeRepeating("NewVal", 0.01f, 20);
         InvokeRepeating("NewVal", 0.01f, timer);
-
+       
     }
 
     void Update()
-{
+    {
 
 
 
-}
+    }
 
 // Update is called once per frame
-void FixedUpdate()
-{
+    void FixedUpdate()
+    {
     // transform.position = Vector3.MoveTowards(transform.position, endPos2, Time.deltaTime * speed);
       
     tempPosition.x += HorizontalSpeed;
@@ -55,16 +56,16 @@ void FixedUpdate()
     tempPosition.z += otherSpeed;
     transform.position = tempPosition;
 
-        Vector3 movement = new Vector3(transform.position.x, 0, transform.position.z).normalized;
+        Vector3 movement = new Vector3(transform.position.x, 0, transform.position.z);
         Quaternion targetRotation = Quaternion.LookRotation(movement);
        
 
         rb.MoveRotation(targetRotation);
         
-}
+    }
 
-void NewVal()
-{
+    void NewVal()
+    {
     newZSpeed = Random.Range(-0.07f, 0.07f);
     newHSpeed = Random.Range(-0.07f, 0.07f);
     newAmp = Random.Range(1f, 2f);
@@ -73,7 +74,10 @@ void NewVal()
     otherSpeed = newZSpeed;
     Amplitude = newAmp;
     timer = newTimer;
-}
+    }
+
+  
+
 
   
 }
