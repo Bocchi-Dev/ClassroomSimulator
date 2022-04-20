@@ -11,7 +11,7 @@ public class ExitWorld : MonoBehaviour
         FindObjectOfType<CustomNetworkManager>().StopClient();
         FindObjectOfType<CustomNetworkManager>().StopHost();
         Cursor.lockState = CursorLockMode.None;
-        SceneManager.LoadScene("MainMenu"); 
+        //SceneManager.LoadScene("MainMenu"); 
     }
 
     private void OnTriggerEnter(Collider other)
