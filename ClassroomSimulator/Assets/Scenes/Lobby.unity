@@ -3028,7 +3028,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
       propertyPath: m_LocalScale.x
@@ -3093,6 +3093,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 105359408}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &105359410 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 105359408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &105359411
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105359410}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1 &106535239
 GameObject:
   m_ObjectHideFlags: 0
@@ -3365,6 +3383,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 121356166}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &121356168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 121356166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &121356169
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121356168}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &123493414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5932,6 +5968,7 @@ GameObject:
   - component: {fileID: 155594431}
   - component: {fileID: 155594434}
   - component: {fileID: 155594433}
+  - component: {fileID: 155594435}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (6)
   m_TagString: Untagged
@@ -6042,6 +6079,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &155594435
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155594429}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1 &156137780
 GameObject:
   m_ObjectHideFlags: 0
@@ -7720,6 +7771,7 @@ GameObject:
   - component: {fileID: 203226500}
   - component: {fileID: 203226503}
   - component: {fileID: 203226502}
+  - component: {fileID: 203226504}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (7)
   m_TagString: Untagged
@@ -7830,6 +7882,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &203226504
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203226498}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1001 &205803853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9480,6 +9546,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 282416915}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &282416917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 282416915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &282416918
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282416917}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &290220875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17256,6 +17340,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 531885334}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &531885336 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 531885334}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &531885337
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531885336}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &532402906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20238,8 +20340,8 @@ Transform:
   - {fileID: 543450651670924101}
   - {fileID: 1200882965}
   - {fileID: 1130659994}
-  - {fileID: 105359409}
   - {fileID: 1815094152}
+  - {fileID: 105359409}
   - {fileID: 1227076326}
   - {fileID: 775688092}
   - {fileID: 282416916}
@@ -20818,6 +20920,7 @@ GameObject:
   - component: {fileID: 604391355}
   - component: {fileID: 604391358}
   - component: {fileID: 604391357}
+  - component: {fileID: 604391359}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (4)
   m_TagString: Untagged
@@ -20928,6 +21031,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &604391359
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604391353}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1 &610654557
 GameObject:
   m_ObjectHideFlags: 0
@@ -25899,6 +26016,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 775688091}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &775688093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 775688091}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &775688094
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775688093}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &780118629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25966,6 +26101,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: poly_chair (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+      propertyPath: m_TagString
+      value: Chair
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
 --- !u!4 &780118630 stripped
@@ -25973,6 +26112,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 780118629}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &780118631 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 780118629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &780118632
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780118631}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &783225274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26040,6 +26197,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: poly_chair (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+      propertyPath: m_TagString
+      value: Chair
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
 --- !u!4 &783225275 stripped
@@ -26047,6 +26208,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 783225274}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &783225276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 783225274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &783225277
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783225276}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &786537912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32520,6 +32699,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: poly_chair (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+      propertyPath: m_TagString
+      value: Chair
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
 --- !u!4 &871887892 stripped
@@ -32527,6 +32710,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 871887891}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &871887893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 871887891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &871887894
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871887893}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &875774208
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40022,6 +40223,7 @@ GameObject:
   - component: {fileID: 997656660}
   - component: {fileID: 997656663}
   - component: {fileID: 997656662}
+  - component: {fileID: 997656664}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (4)
   m_TagString: Untagged
@@ -40132,6 +40334,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &997656664
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997656658}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1 &999306229
 GameObject:
   m_ObjectHideFlags: 0
@@ -40601,6 +40817,7 @@ GameObject:
   - component: {fileID: 1008073038}
   - component: {fileID: 1008073041}
   - component: {fileID: 1008073040}
+  - component: {fileID: 1008073042}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (3)
   m_TagString: Untagged
@@ -40711,6 +40928,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &1008073042
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008073036}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1001 &1008897807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43954,6 +44185,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: poly_chair (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+      propertyPath: m_TagString
+      value: Chair
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
 --- !u!4 &1088545001 stripped
@@ -43961,6 +44196,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 1088545000}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1088545002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 1088545000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1088545003
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088545002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &1089406118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44102,6 +44355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: poly_chair (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+      propertyPath: m_TagString
+      value: Chair
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
 --- !u!4 &1093241315 stripped
@@ -44109,6 +44366,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 1093241314}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1093241316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 1093241314}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1093241317
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093241316}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1 &1099778251
 GameObject:
   m_ObjectHideFlags: 0
@@ -45764,6 +46039,7 @@ GameObject:
   - component: {fileID: 1143408976}
   - component: {fileID: 1143408979}
   - component: {fileID: 1143408978}
+  - component: {fileID: 1143408980}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (1)
   m_TagString: Untagged
@@ -45874,6 +46150,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &1143408980
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143408974}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1001 &1145285052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49883,6 +50173,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 1227076325}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1227076327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 1227076325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1227076328
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227076327}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &1227139925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58963,6 +59271,7 @@ GameObject:
   - component: {fileID: 1435243110}
   - component: {fileID: 1435243113}
   - component: {fileID: 1435243112}
+  - component: {fileID: 1435243114}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (3)
   m_TagString: Untagged
@@ -59073,6 +59382,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &1435243114
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435243108}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1 &1436153181
 GameObject:
   m_ObjectHideFlags: 0
@@ -66448,6 +66771,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 1623179101}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1623179103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 1623179101}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1623179104
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623179103}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &1623596590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69949,6 +70290,7 @@ GameObject:
   - component: {fileID: 1667956522}
   - component: {fileID: 1667956525}
   - component: {fileID: 1667956524}
+  - component: {fileID: 1667956526}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (8)
   m_TagString: Untagged
@@ -70059,6 +70401,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &1667956526
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667956520}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1001 &1668947713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72041,6 +72397,7 @@ GameObject:
   - component: {fileID: 1741723922}
   - component: {fileID: 1741723925}
   - component: {fileID: 1741723924}
+  - component: {fileID: 1741723926}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (2)
   m_TagString: Untagged
@@ -72151,6 +72508,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &1741723926
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741723920}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1001 &1741745071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72225,6 +72596,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 1741745071}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1741745073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 1741745071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1741745074
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1741745073}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1 &1744859419
 GameObject:
   m_ObjectHideFlags: 0
@@ -75545,7 +75934,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b29c022f5ff1e4b298c116c8fdd855d0, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b29c022f5ff1e4b298c116c8fdd855d0, type: 3}
       propertyPath: m_LocalScale.x
@@ -77603,6 +77992,7 @@ GameObject:
   - component: {fileID: 1854114337}
   - component: {fileID: 1854114340}
   - component: {fileID: 1854114339}
+  - component: {fileID: 1854114341}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (2)
   m_TagString: Untagged
@@ -77713,6 +78103,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &1854114341
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854114335}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1001 &1857425570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86407,6 +86811,7 @@ GameObject:
   - component: {fileID: 2033073450}
   - component: {fileID: 2033073453}
   - component: {fileID: 2033073452}
+  - component: {fileID: 2033073454}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001 (5)
   m_TagString: Untagged
@@ -86517,6 +86922,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &2033073454
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033073448}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!1001 &2033740339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90441,6 +90860,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: poly_chair (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+      propertyPath: m_TagString
+      value: Chair
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
 --- !u!4 &2086701262 stripped
@@ -90448,6 +90871,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
   m_PrefabInstance: {fileID: 2086701261}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2086701263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 55928ffd710c74e6b9ed0661362a1929, type: 3}
+  m_PrefabInstance: {fileID: 2086701261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &2086701264
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086701263}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 132.30635
+  m_Center: {x: -375.44763, y: 103.17884, z: -145.58252}
 --- !u!1001 &2088580278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -92291,6 +92732,7 @@ GameObject:
   - component: {fileID: 8035129477308574399}
   - component: {fileID: 2530970968190400540}
   - component: {fileID: 2530970968190400539}
+  - component: {fileID: 2530970968190400541}
   m_Layer: 0
   m_Name: Loung_chair_tan__Loung_chair_tan_001
   m_TagString: Untagged
@@ -92336,6 +92778,20 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+--- !u!64 &2530970968190400541
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2530970968190400538}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1511926539752268826, guid: 9d109b6ea8a364bf1a8532e9df38e193, type: 3}
 --- !u!4 &2635521820465798725
 Transform:
   m_ObjectHideFlags: 0
