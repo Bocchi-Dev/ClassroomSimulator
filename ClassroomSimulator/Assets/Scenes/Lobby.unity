@@ -43637,6 +43637,14 @@ PrefabInstance:
       propertyPath: sceneId
       value: 1104961956
       objectReference: {fileID: 0}
+    - target: {fileID: 7753771203939107563, guid: 5a652a60006d6ec46980e623412396f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753771203939107563, guid: 5a652a60006d6ec46980e623412396f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.149
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a652a60006d6ec46980e623412396f9, type: 3}
 --- !u!4 &1084989983 stripped
@@ -62354,6 +62362,14 @@ PrefabInstance:
     - target: {fileID: 4575040630637711809, guid: 5a652a60006d6ec46980e623412396f9, type: 3}
       propertyPath: sceneId
       value: 2684800269
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753771203939107563, guid: 5a652a60006d6ec46980e623412396f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753771203939107563, guid: 5a652a60006d6ec46980e623412396f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a652a60006d6ec46980e623412396f9, type: 3}
