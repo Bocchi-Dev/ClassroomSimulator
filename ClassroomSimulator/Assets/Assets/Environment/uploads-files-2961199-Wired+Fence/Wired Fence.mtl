@@ -1,0 +1,12 @@
+# Blender MTL File: 'Wired Fence.blend'
+# Material Count: 1
+
+newmtl Metal
+Ns 435.291313
+Ka 0.940909 0.940909 0.940909
+Kd 1.000000 1.000000 1.000000
+Ks 0.568182 0.568182 0.568182
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 3

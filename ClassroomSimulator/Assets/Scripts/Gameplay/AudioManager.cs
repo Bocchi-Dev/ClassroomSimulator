@@ -1,13 +1,15 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class AudioManager : MonoBehaviour
 {
 
     public Sounds[] sound;
-    int rand = UnityEngine.Random.Range(10, 20);
+    int newBirdSound;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,6 +21,7 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
             s.source.time = s.time;
+            s.source.playOnAwake = s.PlayOnAwake;
             s.source.spatialBlend = s.SpatialSound;
         }
     }
@@ -26,6 +29,8 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         Play("bgmusic1");
+        InvokeRepeating("playBell", 5, 1800);
+        InvokeRepeating("BirdSound", 10, 10f + Random.Range(5, 10));
     }
     // Update is called once per frame
     void Update()
@@ -43,6 +48,25 @@ public class AudioManager : MonoBehaviour
     {
         Sounds s = Array.Find(sound, sound => sound.name == name);
         s.source.Stop();
+    }
+
+    void playBell()
+    {
+        Play("SchoolBell");
+    }
+
+    void BirdSound()
+    {
+        newBirdSound = Random.Range(1, 2);
+
+        if (newBirdSound == 1)
+        {
+            FindObjectOfType<AudioManager>().Play("BirdSong1");
+        }
+        else
+        {
+            FindObjectOfType<AudioManager>().Play("BirdSong2");
+        }
     }
 
 }

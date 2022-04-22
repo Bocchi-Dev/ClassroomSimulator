@@ -293,6 +293,7 @@ namespace ClassroomSimulator
                 }
             }
 
+          
             tempDirectionY -= gravity * Time.deltaTime;
             velocity.y = tempDirectionY;
 

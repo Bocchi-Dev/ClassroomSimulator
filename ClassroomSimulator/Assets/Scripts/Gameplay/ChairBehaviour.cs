@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using ClassroomSimulator;
 
-namespace ClassroomSimulator
-{
     public class ChairBehaviour : NetworkBehaviour
     {
         public GameObject prefabPlayer;
@@ -17,9 +16,12 @@ namespace ClassroomSimulator
         Player player;
         CharacterController charac;
         Vector3 newPos;
+        
+       
 
         void Start()
         {
+
             isSitting = false;
             isStanding = true;
         }
@@ -42,6 +44,7 @@ namespace ClassroomSimulator
                     player.moveSpeed = 0f;
                     player.anime.SetBool("isSitting", true);
                     Debug.Log("i sat");
+                   
                 }
                 
             }
@@ -99,4 +102,4 @@ namespace ClassroomSimulator
 
 
     }
-}
+
