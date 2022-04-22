@@ -51,21 +51,37 @@ namespace ClassroomSimulator
                 case 1:
                     {
                         hairZero.SetActive(true);
+
+                        hairOne.SetActive(false);
+                        hairTwo.SetActive(false);
+                        hairThree.SetActive(false);
                     }
                     break;
                 case 2:
                     {
                         hairOne.SetActive(true);
+
+                        hairZero.SetActive(false);
+                        hairTwo.SetActive(false);
+                        hairThree.SetActive(false);
                     }
                    break;
                 case 3:
                     {
                         hairTwo.SetActive(true);
+
+                        hairZero.SetActive(false);
+                        hairOne.SetActive(false);
+                        hairThree.SetActive(false);
                     }
                     break;
                 case 4:
                     {
                         hairThree.SetActive(true);
+
+                        hairZero.SetActive(false);
+                        hairTwo.SetActive(false);
+                        hairOne.SetActive(false);
                     }
                     break;
                 case 5:
@@ -73,8 +89,6 @@ namespace ClassroomSimulator
                         GetComponent<DisableAllGameObjectsOfParent>().DisableAllChildren();
                     }
                     break;
-
-
             }
         }
 
