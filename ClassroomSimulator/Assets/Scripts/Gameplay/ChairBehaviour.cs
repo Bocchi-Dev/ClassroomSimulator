@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using ClassroomSimulator;
 
+namespace ClassroomSimulator
+{
     public class ChairBehaviour : NetworkBehaviour
     {
         public GameObject prefabPlayer;
@@ -16,12 +17,9 @@ using ClassroomSimulator;
         Player player;
         CharacterController charac;
         Vector3 newPos;
-        
-       
 
         void Start()
         {
-
             isSitting = false;
             isStanding = true;
         }
@@ -43,15 +41,17 @@ using ClassroomSimulator;
                     prefabPlayer.transform.rotation =Quaternion.Euler(sittingPos.rotation.x, sittingPos.rotation.y, sittingPos.rotation.z);
                     player.moveSpeed = 0f;
                     Debug.Log("i sat");
-                   
                 }
                 
             }
-           
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                charac.enabled = true;
+               
+            }
             if (isSitting)
             {
-              
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     isSitting = false;
                     isStanding = true;
@@ -63,7 +63,7 @@ using ClassroomSimulator;
                 }
                
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.Escape))
             {
                 charac.enabled = true;
             }
@@ -97,4 +97,4 @@ using ClassroomSimulator;
 
 
     }
-
+}
