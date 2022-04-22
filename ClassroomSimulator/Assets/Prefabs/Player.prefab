@@ -471,7 +471,7 @@ MonoBehaviour:
   controller: {fileID: 4665223277009370005}
   anime: {fileID: 7510405522607842131}
   gravity: 10
-  jumpSpeed: 10
+  jumpSpeed: 8
   playerBodyRenderer: {fileID: 3921642577336189397}
   hairZero: {fileID: 6281281746214159829}
   hairOne: {fileID: 1564926419815836068}
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  clientAuthority: 0
+  clientAuthority: 1
   animator: {fileID: 7510405522607842131}
 --- !u!1 &4989311876635983687
 GameObject:
