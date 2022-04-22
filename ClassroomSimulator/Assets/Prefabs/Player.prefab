@@ -282,8 +282,8 @@ GameObject:
   - component: {fileID: 7785924051478832713}
   - component: {fileID: 4624080553491799521}
   - component: {fileID: 4739337760876373561}
-  - component: {fileID: 5106804657401896200}
-  - component: {fileID: 2873058515934067885}
+  - component: {fileID: 7143661722844853855}
+  - component: {fileID: 1063899396780497712}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -300,11 +300,10 @@ Transform:
   m_GameObject: {fileID: 4665223277009370008}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.21728754, y: 0.676, z: 0.82235867}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 2830370782849301356}
   - {fileID: 6579797639903561302}
-  - {fileID: 3975576741143842789}
   - {fileID: 9169612695017337345}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -467,12 +466,12 @@ MonoBehaviour:
   playerNameText: {fileID: 3165107655408045486}
   floatingInfo: {fileID: 7816150434414208728}
   trafficType: none
-  moveSpeed: 10
+  moveSpeed: 20
   jumpVelocity: 0
   controller: {fileID: 4665223277009370005}
   anime: {fileID: 7510405522607842131}
   gravity: 10
-  jumpSpeed: 7
+  jumpSpeed: 10
   playerBodyRenderer: {fileID: 3921642577336189397}
   hairZero: {fileID: 6281281746214159829}
   hairOne: {fileID: 1564926419815836068}
@@ -564,6 +563,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &7143661722844853855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665223277009370008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5eaac490c23334dbb1198d6ec7fc17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentGameObject: {fileID: 8531138868518299616}
+--- !u!114 &1063899396780497712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665223277009370008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  animator: {fileID: 7510405522607842131}
 --- !u!1 &4989311876635983687
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,8 +602,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9169612695017337345}
   - component: {fileID: 4994993637470405385}
-  - component: {fileID: 7143661722844853855}
-  - component: {fileID: 2716156275876739499}
+  - component: {fileID: 7767083006698582391}
+  - component: {fileID: 2139384581024039530}
   m_Layer: 0
   m_Name: FloorCheck
   m_TagString: Untagged
@@ -595,7 +623,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 4665223277009370007}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4994993637470405385
 BoxCollider:
@@ -610,42 +638,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 3.4701395, z: 1}
   m_Center: {x: 0, y: -1.2350678, z: 0}
---- !u!114 &7143661722844853855
+--- !u!114 &7767083006698582391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4665223277009370008}
+  m_GameObject: {fileID: 4989311876635983687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c5eaac490c23334dbb1198d6ec7fc17, type: 3}
+  m_Script: {fileID: 11500000, guid: 86396604a88d2c341a1ced6571326875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentGameObject: {fileID: 8531138868518299616}
---- !u!114 &2873058515934067885
-MonoBehaviour:
   stepRate: 0.59
   stepCoolDown: 0
   footStepCon: {fileID: 8300000, guid: 14bab19221509b046ab8ac1915ffc9f8, type: 3}
   footStepGrass: {fileID: 8300000, guid: b31877a0a8542804abc6c755f3cefa5d, type: 3}
+  behaviour: {fileID: 0}
   cc: {fileID: 4665223277009370005}
---- !u!82 &2716156275876739499
+--- !u!82 &2139384581024039530
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4665223277009370008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 1
-  animator: {fileID: 7510405522607842131}
   m_GameObject: {fileID: 4989311876635983687}
   m_Enabled: 1
   serializedVersion: 4
@@ -994,7 +1010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9d0eb36324b145b45ac4fc833daaf75c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9d0eb36324b145b45ac4fc833daaf75c, type: 3}
       propertyPath: m_LocalPosition.z
