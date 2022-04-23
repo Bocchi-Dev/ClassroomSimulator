@@ -109,6 +109,7 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+  chairCollider: {fileID: 0}
 --- !u!64 &7410453516586193810
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -164,7 +165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2260002847019637915}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: -0.166, y: 0.609, z: 0.071}
+  m_LocalPosition: {x: -0.166, y: 0.8, z: -0.097}
   m_LocalScale: {x: 0.06562493, y: 0.08510909, z: 0.08595776}
   m_Children: []
   m_Father: {fileID: 4558593196022300}

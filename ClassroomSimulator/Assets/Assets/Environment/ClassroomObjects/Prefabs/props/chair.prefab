@@ -108,6 +108,7 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+  chairCollider: {fileID: 0}
 --- !u!64 &-8120887257766393524
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -163,7 +164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5319329613159472933}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.008, y: 0.304, z: 0.698}
+  m_LocalPosition: {x: 0.008, y: 0.304, z: 0.78}
   m_LocalScale: {x: 0.087630086, y: 0.08826993, z: 0.08855743}
   m_Children: []
   m_Father: {fileID: 4958332315337656}
@@ -193,8 +194,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6429784658828482352}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.008, y: 0.5573548, z: 0.164}
-  m_LocalScale: {x: 0.087630086, y: 0.08826993, z: 0.08855743}
+  m_LocalPosition: {x: 0.008, y: 0.74, z: -0.37}
+  m_LocalScale: {x: 0.09953902, y: 0.08826993, z: 0.08855743}
   m_Children: []
   m_Father: {fileID: 4958332315337656}
   m_RootOrder: 0

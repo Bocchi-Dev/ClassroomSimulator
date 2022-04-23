@@ -470,8 +470,8 @@ MonoBehaviour:
   jumpVelocity: 0
   controller: {fileID: 4665223277009370005}
   anime: {fileID: 7510405522607842131}
-  gravity: 12
-  jumpSpeed: 8
+  gravity: 20
+  jumpSpeed: 15
   playerBodyRenderer: {fileID: 3921642577336189397}
   hairZero: {fileID: 6281281746214159829}
   hairOne: {fileID: 1564926419815836068}
