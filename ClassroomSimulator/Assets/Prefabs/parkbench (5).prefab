@@ -163,6 +163,7 @@ MonoBehaviour:
   speed: 0.2
   isSitting: 0
   isStanding: 0
+  chairCollider: {fileID: 7433805649757233501}
 --- !u!114 &1146367462763709390
 MonoBehaviour:
   m_ObjectHideFlags: 0

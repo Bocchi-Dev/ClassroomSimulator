@@ -16,22 +16,20 @@ using ClassroomSimulator;
         Player player;
         CharacterController charac;
         Vector3 newPos;
-        
+        public Collider chairCollider;
+        float setPlayerSpeed;
        
 
         void Start()
         {
-
+            chairCollider = GetComponent<Collider>();
             isSitting = false;
             isStanding = true;
         }
 
         // Update is called once per frame
         void Update()
-        {
-
-
-          
+        {     
             if (isStanding)
             {
                 if (isHitting && Input.GetButtonDown("Sit"))
@@ -41,17 +39,17 @@ using ClassroomSimulator;
                     charac.enabled = false;
                     prefabPlayer.transform.position = new Vector3(sittingPos.position.x, sittingPos.position.y, sittingPos.position.z);
                     prefabPlayer.transform.rotation =Quaternion.Euler(sittingPos.rotation.x, sittingPos.rotation.y, sittingPos.rotation.z);
+                    setPlayerSpeed = player.moveSpeed;
                     player.moveSpeed = 0f;
                     player.anime.SetBool("isSitting", true);
                     Debug.Log("i sat");
-                   
-                }
+                    chairCollider.enabled = false;
+            }
                 
             }
             if (Input.GetButtonDown("Sit"))
             {
                 charac.enabled = true;
-               
             }
             if (isSitting)
             {
@@ -62,9 +60,10 @@ using ClassroomSimulator;
                     charac.enabled = false;
                     prefabPlayer.transform.position = new Vector3(exitPos.position.x, exitPos.position.y, exitPos.position.z);
                     prefabPlayer.transform.rotation = Quaternion.Euler(sittingPos.rotation.x, sittingPos.rotation.y, sittingPos.rotation.z);
-                    player.moveSpeed = 10f;
+                    player.moveSpeed = setPlayerSpeed;
                     player.anime.SetBool("isSitting", false);
                     Debug.Log("i stand");
+                    chairCollider.enabled = true;
                 }
                
             }
