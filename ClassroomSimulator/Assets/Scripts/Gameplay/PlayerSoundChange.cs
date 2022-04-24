@@ -56,6 +56,16 @@ public class PlayerSoundChange : MonoBehaviour
         {
             behaviour = other.GetComponent<ChairBehaviour>();
         }
+        if (other.gameObject.CompareTag("Lounge"))
+        {
+            FindObjectOfType<AudioManager>().Stop("bgmusic1");
+            FindObjectOfType<AudioManager>().Play("Lounge");
+        }
+        if (other.gameObject.CompareTag("Garden"))
+        {
+            FindObjectOfType<AudioManager>().Stop("bgmusic1");
+            FindObjectOfType<AudioManager>().Play("Garden");
+        }
     }
 
    void OnTriggerExit(Collider other)
@@ -67,6 +77,16 @@ public class PlayerSoundChange : MonoBehaviour
         if (other.gameObject.CompareTag("Chair"))
         {
             behaviour = null;
+        }
+        if (other.gameObject.CompareTag("Lounge"))
+        {
+            FindObjectOfType<AudioManager>().Play("bgmusic1");
+            FindObjectOfType<AudioManager>().Stop("Lounge");
+        }
+        if (other.gameObject.CompareTag("Garden"))
+        {
+            FindObjectOfType<AudioManager>().Play("bgmusic1");
+            FindObjectOfType<AudioManager>().Stop("Garden");
         }
     }
 

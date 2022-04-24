@@ -11,6 +11,8 @@ TagManager:
   - Chair
   - Chair2
   - Grass
+  - Lounge
+  - Garden
   layers:
   - Default
   - TransparentFX
