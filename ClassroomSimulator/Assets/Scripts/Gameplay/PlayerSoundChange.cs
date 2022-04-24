@@ -22,7 +22,6 @@ public class PlayerSoundChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         stepCoolDown -= Time.deltaTime;
        
         if (cc.velocity.magnitude > 2f && stepCoolDown < 0f && cc.isGrounded == true)
@@ -40,10 +39,7 @@ public class PlayerSoundChange : MonoBehaviour
         {
             GetComponent<AudioSource>().Stop();
         }
-
     }
-
- 
 
     void OnTriggerEnter(Collider other)
     {
