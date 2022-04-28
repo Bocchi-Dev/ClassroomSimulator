@@ -76,10 +76,11 @@ using ClassroomSimulator;
 
         private void OnTriggerEnter(Collider other)
         {
+        Debug.Log(other.name);
 
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("SeatDetecter"))
             {
-                prefabPlayer = other.gameObject;
+                prefabPlayer = other.gameObject.transform.parent.gameObject;
 
                 charac = prefabPlayer.GetComponent<CharacterController>();
                 player = prefabPlayer.GetComponent<Player>();
@@ -89,7 +90,7 @@ using ClassroomSimulator;
         private void OnTriggerExit(Collider other)
         {
 
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("SeatDetecter"))
             {
                 prefabPlayer = null;
 

@@ -27,11 +27,11 @@ public class MouseLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
 
-        if (Input.GetKeyDown("Escape"))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
         }
-        if(Input.GetMouseButtonDown(1) && Cursor.lockState == CursorLockMode.None)
+        if(Input.GetMouseButtonDown(0) && Cursor.lockState == CursorLockMode.None)
         {
             Cursor.lockState = CursorLockMode.Locked;
         }

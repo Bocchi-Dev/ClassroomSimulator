@@ -13,6 +13,7 @@ TagManager:
   - Grass
   - Lounge
   - Garden
+  - SeatDetecter
   layers:
   - Default
   - TransparentFX

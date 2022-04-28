@@ -291,8 +291,6 @@ namespace ClassroomSimulator
             //transform.Translate(new Vector3(horizontalInput, 0, verticalInput) * moveSpeed * Time.deltaTime);
             Vector3 direction = new Vector3(horizontalInput, 0, verticalInput);
 
-            Debug.Log("Player is grounded: " + controller.isGrounded);
-
             Vector3 velocity = direction * moveSpeed;
             velocity = Camera.main.transform.TransformDirection(velocity);
 
